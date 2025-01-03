@@ -1,7 +1,4 @@
 
-
-import org.w3c.dom.ls.LSOutput;
-
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -153,10 +150,6 @@ public class Main {
 
             }
 
-
-
-//            positionArray[ii] = averageArray[ii];
-//            position = findIndex(positionArray, positionArray[ii]);
 
 
 //            System.out.println(position);
