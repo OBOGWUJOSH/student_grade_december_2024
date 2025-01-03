@@ -115,8 +115,6 @@ public class Main {
             System.out.printf("%3.2f%s", averageArray[ii], "    ");
 
 
-//            System.out.println(Arrays.toString(averageArray));
-
 
 //            Arrays.sort(averageArray);
 
