@@ -95,7 +95,7 @@ public class Main {
 //        double[] temp = new double[numberOfSubject];
 
         int i;
-//        int j;
+        int j;
 
 
 //      printing out the Table BODY
@@ -124,7 +124,7 @@ public class Main {
 //            Arrays.sort(averageArray);
 
             int l;
-            int position;
+            int position = 0;
             double[] positionArray = new double[averageArray.length];
 
 
@@ -140,9 +140,17 @@ public class Main {
 //                System.out.println(Arrays.toString(positionArray));
             }
 
-            for (int j = 0; j < averageArray.length; j++) {
-                positionArray[j] = averageArray[j];
+            for (int k = 0; k < averageArray.length; k++) {
+
+
+                for (j = 0; j < averageArray.length; j++) {
+                    positionArray[j] = averageArray[j];
+                    position = findIndex(positionArray, positionArray[j]);
+                }
+
+                System.out.println(position);
                 System.out.println(Arrays.toString(positionArray));
+
             }
 
 
@@ -153,13 +161,6 @@ public class Main {
 
 //            System.out.println(position);
             System.out.println(" ");
-
-//            for (l = 0; l < averageArray.length; l++) {
-//
-//                System.out.println(positionArray[l]);
-//            }
-
-//            System.out.println(Arrays.toString(positionArray));
 
         }
 
