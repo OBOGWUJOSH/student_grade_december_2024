@@ -89,7 +89,7 @@ public class Main {
 
         int[] totalArray = new int[numberOfStudent];
         double[] averageArray = new double[totalArray.length];
-//        double[] temp = new double[numberOfSubject];
+
 
 
 
@@ -116,7 +116,8 @@ public class Main {
             System.out.printf("%3.2f%s", averageArray[ii], "    ");
 
 
-//            Arrays.sort(averageArray);
+
+
 
 
             int position = 0;
@@ -139,23 +140,25 @@ public class Main {
 
             positionArray[ii] = averageArray[ii];
 
+            Arrays.sort(positionArray);
+
+
+
+            System.out.println(Arrays.toString(positionArray));
+
 
             position = findIndex(positionArray, positionArray[ii]);
 
-            System.out.println(position);
-
+//            System.out.println(position);
 //            System.out.println(Arrays.toString(positionArray));
 
-//            System.out.println(position);
 
             System.out.println(" ");
-
         }
 
         System.out.println(" ");
 
         System.out.println(equals.repeat(60));
-
     }
 
 
