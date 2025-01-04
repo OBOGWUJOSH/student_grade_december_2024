@@ -139,14 +139,13 @@ public class Main {
 
 
 
-                for (j = 0; j < averageArray.length; j++) {
-                    positionArray[j] = averageArray[j];
-                    position = findIndex(positionArray, positionArray[j]);
+            for (j = 0; j < averageArray.length; j++) {
+                positionArray[j] = averageArray[j];
+                position = findIndex(positionArray, positionArray[j]);
+            }
 
-                }
-
-                System.out.println(position);
-//                System.out.println(Arrays.toString(positionArray));
+            System.out.println(position);
+//               System.out.println(Arrays.toString(positionArray));
 
 
 
@@ -167,7 +166,7 @@ public class Main {
     private static int findIndex(double[] positionArray, double position) {
         for (int i = 0; i < positionArray.length; i++) {
             if (positionArray[i] == position) {
-                return i + 1;
+                return i;
             }
         }
         return -1;
