@@ -143,13 +143,12 @@ public class Main {
             Arrays.sort(positionArray);
 
 
-
-            System.out.println(Arrays.toString(positionArray));
+//            System.out.println(Arrays.toString(positionArray));
 
 
             position = findIndex(positionArray, positionArray[ii]);
 
-//            System.out.println(position);
+            System.out.println(position);
 //            System.out.println(Arrays.toString(positionArray));
 
 
