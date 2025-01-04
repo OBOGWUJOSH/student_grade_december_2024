@@ -91,12 +91,13 @@ public class Main {
         double[] averageArray = new double[totalArray.length];
 //        double[] temp = new double[numberOfSubject];
 
-        int i;
-        int j;
 
 
 //      printing out the Table BODY
         for (ii = 0; ii < studentCounter; ii++) {
+            int i;
+
+
 
 //      fix the spacing problem in front of the student
             System.out.printf("%s%3d%s", "Student",(ii + 1), "   ");
@@ -115,12 +116,11 @@ public class Main {
             System.out.printf("%3.2f%s", averageArray[ii], "    ");
 
 
-
-
 //            Arrays.sort(averageArray);
 
-            int l;
+
             int position = 0;
+            int j = 0;
             double[] positionArray = new double[averageArray.length];
 
 
@@ -137,27 +137,25 @@ public class Main {
             }
 
 
+            positionArray[ii] = averageArray[ii];
 
 
-            for (j = 0; j < averageArray.length; j++) {
-                positionArray[j] = averageArray[j];
-                position = findIndex(positionArray, positionArray[j]);
-            }
+            position = findIndex(positionArray, positionArray[ii]);
 
             System.out.println(position);
-//               System.out.println(Arrays.toString(positionArray));
 
-
+//            System.out.println(Arrays.toString(positionArray));
 
 //            System.out.println(position);
+
             System.out.println(" ");
 
         }
 
-
         System.out.println(" ");
 
         System.out.println(equals.repeat(60));
+
     }
 
 
@@ -166,7 +164,7 @@ public class Main {
     private static int findIndex(double[] positionArray, double position) {
         for (int i = 0; i < positionArray.length; i++) {
             if (positionArray[i] == position) {
-                return i;
+                return i + 1;
             }
         }
         return -1;
