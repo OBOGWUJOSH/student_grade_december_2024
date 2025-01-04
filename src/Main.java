@@ -116,6 +116,7 @@ public class Main {
 
 
 
+
 //            Arrays.sort(averageArray);
 
             int l;
@@ -135,18 +136,17 @@ public class Main {
 //                System.out.println(Arrays.toString(positionArray));
             }
 
-            for (int k = 0; k < averageArray.length; k++) {
+
 
 
                 for (j = 0; j < averageArray.length; j++) {
                     positionArray[j] = averageArray[j];
                     position = findIndex(positionArray, positionArray[j]);
+
                 }
 
                 System.out.println(position);
-                System.out.println(Arrays.toString(positionArray));
-
-            }
+//                System.out.println(Arrays.toString(positionArray));
 
 
 
