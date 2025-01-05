@@ -127,7 +127,6 @@ public class Main {
 
 
 
-//            Arrays.sort(positionArray);
 
 //            int cntDown = averageArray.length - 1;
 
@@ -139,25 +138,36 @@ public class Main {
                     averageArray[i] = averageArray[averageArray.length - 1 - i];
                     averageArray[averageArray.length - 1 - i] = temp;
                 }
-//                System.out.println(cntDown);
             }
 
 
 
             for (i = 0; i < averageArray.length; i++) {
-                int revCount = averageArray.length - 1;
-//                positionArray[i] = averageArray[i];
-                positionArray[i] = averageArray[revCount];
-                position = findIndex(positionArray, positionArray[i]);
+//                int revCount = averageArray.length - 1;
+                positionArray[i] = averageArray[i];
             }
 
-
-//            System.out.println(position);
-
-//            System.out.println(Arrays.toString(positionArray));
+            Arrays.sort(positionArray);
 
 
-//            System.out.println(Arrays.toString(positionArray));
+            for (int j = 0; j < averageArray.length; j++) {
+
+                for (int k = 0; k < averageArray.length; k++) {
+                    if (positionArray[j] == averageArray[k]) {
+                        position = k + 1;
+                        break;
+                    }
+
+                }
+
+            }
+            System.out.println(position);
+
+
+
+
+//            position = findIndex(positionArray, positionArray[ii]);
+
 
             System.out.println(" ");
         }
