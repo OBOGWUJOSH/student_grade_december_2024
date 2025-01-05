@@ -83,6 +83,9 @@ public class Main {
         System.out.println(equals.repeat(60));
 
 
+
+
+
         int ii;
         int jj;
 //        int position = 0;
@@ -119,31 +122,40 @@ public class Main {
 
 
             int position = 0;
-            int j = 0;
+//            int j = 0;
             double[] positionArray = new double[averageArray.length];
 
 
 
+//            Arrays.sort(positionArray);
 
-            for (i = 0; i < averageArray.length / 2; i++) {
+//            int cntDown = averageArray.length - 1;
 
+
+            //sorting through the array
+            for (i = 0; i < averageArray.length-1; i++) {
                 if (averageArray[i] < averageArray[i + 1]){
-                    double temp = averageArray[ii];
-                    averageArray[ii] = averageArray[averageArray.length - 1 - ii];
-                    averageArray[averageArray.length - 1 - ii] = temp;
+                    double temp = averageArray[i];
+                    averageArray[i] = averageArray[averageArray.length - 1 - i];
+                    averageArray[averageArray.length - 1 - i] = temp;
                 }
-//                System.out.println(Arrays.toString(positionArray));
+//                System.out.println(cntDown);
             }
-            positionArray[ii] = averageArray[ii];
 
-            Arrays.sort(positionArray);
+
+
+            for (i = 0; i < averageArray.length; i++) {
+                int revCount = averageArray.length - 1;
+//                positionArray[i] = averageArray[i];
+                positionArray[i] = averageArray[revCount];
+                position = findIndex(positionArray, positionArray[i]);
+            }
+
+
+//            System.out.println(position);
 
 //            System.out.println(Arrays.toString(positionArray));
 
-
-            position = findIndex(positionArray, positionArray[ii]);
-
-            System.out.println(position);
 
 //            System.out.println(Arrays.toString(positionArray));
 
