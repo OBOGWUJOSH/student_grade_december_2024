@@ -91,8 +91,6 @@ public class Main {
         double[] averageArray = new double[totalArray.length];
 
 
-
-
 //      printing out the Table BODY
         for (ii = 0; ii < studentCounter; ii++) {
             int i;
