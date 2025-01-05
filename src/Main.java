@@ -135,11 +135,9 @@ public class Main {
 //                System.out.println(Arrays.toString(positionArray));
             }
 
-
             positionArray[ii] = averageArray[ii];
 
             Arrays.sort(positionArray);
-
 
 //            System.out.println(Arrays.toString(positionArray));
 
