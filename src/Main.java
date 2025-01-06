@@ -53,6 +53,7 @@ public class Main {
             for (subjectCounter = 0; subjectCounter < numberOfSubject; subjectCounter++) {
 
 
+                
                 System.out.println("Enter the scores of student " + (studentCounter + 1));
 //
                 System.out.print("subject " + (subjectCounter + 1) + ": ");
@@ -141,7 +142,6 @@ public class Main {
             }
 
 
-
             for (i = 0; i < averageArray.length; i++) {
 //                int revCount = averageArray.length - 1;
                 positionArray[i] = averageArray[i];
@@ -150,25 +150,22 @@ public class Main {
             Arrays.sort(positionArray);
 
 
-            for (int j = 0; j < averageArray.length; j++) {
 
+            for (int j = 0; j < averageArray.length; j++) {
                 for (int k = 0; k < averageArray.length; k++) {
                     if (positionArray[j] == averageArray[k]) {
                         position = k + 1;
                         break;
                     }
-
                 }
-
             }
+
+            System.out.println(Arrays.toString(averageArray));
+            System.out.println(Arrays.toString(positionArray));
+
             System.out.println(position);
 
-
-
-
 //            position = findIndex(positionArray, positionArray[ii]);
-
-
             System.out.println(" ");
         }
 
@@ -176,7 +173,6 @@ public class Main {
 
         System.out.println(equals.repeat(60));
     }
-
 
 
 
