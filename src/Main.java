@@ -19,6 +19,7 @@ public class Main {
         Scanner scannerOne = new Scanner(System.in);
 
 //        System.out.print("Teachers Name: ");
+
 //        String teacherName = scannerOne.nextLine();
 
 
@@ -52,6 +53,7 @@ public class Main {
             for (subjectCounter = 0; subjectCounter < numberOfSubject; subjectCounter++) {
 
 
+                
                 System.out.println("Enter the scores of student " + (studentCounter + 1));
 //
                 System.out.print("subject " + (subjectCounter + 1) + ": ");
@@ -82,111 +84,120 @@ public class Main {
         System.out.println(equals.repeat(60));
 
 
+
+
+
         int ii;
         int jj;
         int position = 0;
 
         int[] totalArray = new int[numberOfStudent];
         double[] averageArray = new double[totalArray.length];
-        double[] positionArray = new double[averageArray.length];
 
 
 //      printing out the Table BODY
         for (ii = 0; ii < studentCounter; ii++) {
+            int i;
+
 
 
 //      fix the spacing problem in front of the student
-            System.out.printf("%s%3d%s", "Student", (ii + 1), "   ");
+            System.out.printf("%s%3d%s", "Student",(ii + 1), "   ");
 
             for (jj = 0; jj < subjectCounter; jj++) {
                 System.out.printf("%3d%s", studentListB[ii][jj], "     ");
                 totalArray[ii] += studentListB[ii][jj];
                 averageArray[ii] = (double) totalArray[ii] / numberOfSubject;
 
-                if (averageArray[ii] == positionArray[jj]){
 
-
-
-                }
             }
 
 
             //Total column print out
-            System.out.printf("%3d%s", totalArray[ii],"    ");
+            System.out.printf("%3d%s", totalArray[ii], "    ");
             //Average column print out
-            System.out.printf("%3.2f%s", averageArray[ii],"    ");
+            System.out.printf("%3.2f%s", averageArray[ii], "    ");
 
 
-            int p;
-            int i;
+
+
+
+
+
+//            int j = 0;
+            double[] positionArray = new double[averageArray.length];
+
+
+
 
             for (i = 0; i < averageArray.length; i++) {
                 positionArray[i] = averageArray[i];
             }
 
-            //sorting through the array
-            for (p = 0; p < positionArray.length - 1; p++) {
-                if (positionArray[p] < positionArray[p + 1]) {
-                    double temp = positionArray[p];
-                    positionArray[p] = positionArray[positionArray.length - 1 - p];
-                    positionArray[positionArray.length - 1 - p] = temp;
-                }
-            }
-
-
 //            Arrays.sort(positionArray);
 
-
-//            System.out.println(positionArray[ii]);
-
-
-            System.out.println(Arrays.toString(averageArray));//arranged in descending order ❌
-            System.out.println(Arrays.toString(positionArray));//arranged in ascending order ✅
+            sortArray(positionArray);
 
 
+            position = findIndex(averageArray,positionArray[ii]);
 
-            //Print out the position
 
-//            position = positioning(averageArray[ii], positionArray);
-//            System.out.println(position);
+            //printing out the position
+//            for (int j = 0; j < positionArray.length; j++) {
+//                for (int k = 0; k < positionArray.length; k++) {
+//                    if (averageArray[k] == positionArray[ii]) {
+//                        position = k + 1;
+//                        break;
+//                    }
+//                }
+//            }
+
+
+
+//            System.out.println(Arrays.toString(averageArray));//❌
+            System.out.println(Arrays.toString(positionArray));//✅
+
+            System.out.println(position);
+
+//
+
 
             System.out.println(" ");
         }
 
         System.out.println(" ");
+
         System.out.println(equals.repeat(60));
     }
 
 
 
 
-
-    private static int positioning (double indexPosition, double []positionArray) {
-
-        int i = 0;
-        int position = 0;
-
-//        for (int j = 0; j < averageArray.length; j++){
-            for (i = 0; i < positionArray.length; i++) {
-                if (indexPosition == positionArray[i]){
-                    position = i + 1;
-                    break;
-                }
+    private static void sortArray(double[] arr){
+        int i;
+        for (i = 0; i < arr.length-1; i++) {
+            if (arr[i] < arr[i + 1]) {
+                double temp = arr[i];
+                arr[i] = arr[arr.length - 1 - i];
+                arr[arr.length - 1 - i] = temp;
             }
-//        }
-        return position;
+        }
+    }
+
+    private static int findIndex(double[] positionArray, double position) {
+//        for (int i = 0; i < positionArray.length; i++) {
+        int i = 0;
+        while (i < positionArray.length){
+            if ( position != positionArray[i]) {
+                i++;
+            }else if (position == positionArray[i]) {
+                return i + 1;
+            }
+        }
+        return -1;
     }
 
 
-
-
-//    private static int findIndex(double[] positionArray, double position) {
-//        for (int i = 0; i < positionArray.length; i++) {
-//            if (positionArray[i] == position) {
-//                return i + 1;
-//            }
-//        }
-//    }
-
-
 }
+
+
