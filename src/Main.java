@@ -93,6 +93,7 @@ public class Main {
 
         int[] totalArray = new int[numberOfStudent];
         double[] averageArray = new double[totalArray.length];
+        double[] positionArray = new double[averageArray.length];
 
 
 //      printing out the Table BODY
@@ -100,15 +101,17 @@ public class Main {
             int i;
 
 
-
 //      fix the spacing problem in front of the student
-            System.out.printf("%s%3d%s", "Student",(ii + 1), "   ");
+            System.out.printf("%s%3d%s", "Student", (ii + 1), "   ");
 
             for (jj = 0; jj < subjectCounter; jj++) {
                 System.out.printf("%3d%s", studentListB[ii][jj], "     ");
                 totalArray[ii] += studentListB[ii][jj];
                 averageArray[ii] = (double) totalArray[ii] / numberOfSubject;
 
+                for (i = 0; i < averageArray.length; i++) {
+                    positionArray[i] = averageArray[i];
+                }
 
             }
 
@@ -117,53 +120,20 @@ public class Main {
             System.out.printf("%3d%s", totalArray[ii], "    ");
             //Average column print out
             System.out.printf("%3.2f%s", averageArray[ii], "    ");
-
-
-
-
-
-
-
-//            int j = 0;
-            double[] positionArray = new double[averageArray.length];
-
-
-
-
-            for (i = 0; i < averageArray.length; i++) {
-                positionArray[i] = averageArray[i];
-            }
-
-//            Arrays.sort(positionArray);
-
-            sortArray(positionArray);
-
-
-            position = findIndex(averageArray,positionArray[ii]);
-
-
-            //printing out the position
-//            for (int j = 0; j < positionArray.length; j++) {
-//                for (int k = 0; k < positionArray.length; k++) {
-//                    if (averageArray[k] == positionArray[ii]) {
-//                        position = k + 1;
-//                        break;
-//                    }
-//                }
-//            }
-
-
-
-//            System.out.println(Arrays.toString(averageArray));//❌
-            System.out.println(Arrays.toString(positionArray));//✅
-
-            System.out.println(position);
-
-//
-
+            sortArray(averageArray);
 
             System.out.println(" ");
         }
+
+
+        position = findIndex(averageArray,positionArray[ii]);
+
+        System.out.println(Arrays.toString(positionArray));//✅
+
+        System.out.println(position);
+
+//
+
 
         System.out.println(" ");
 
