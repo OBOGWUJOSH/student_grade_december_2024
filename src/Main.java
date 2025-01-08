@@ -112,18 +112,20 @@ public class Main {
             //Average column print out
             System.out.printf("%3.2f%s", averageArray[ii], "    ");
 
-
             //Position column print out;
-//            int i;
-//            for (i = 0; i < averageArray.length; i++) {
-//
-//            }
-            position = findIndex(averageArray, positionArray[ii]);
-            System.out.printf("%2d\n",position);
-
-//            System.out.printf("%-20s\n",Arrays.toString(positionArray));//✅
+//            sortArray(positionArray);
 
         }
+
+            position = findIndex(averageArray, positionArray);
+            //print out the position
+            System.out.printf("%2d\n",position);
+            System.out.println(" ");
+
+//        System.out.printf("%-20s\n",Arrays.toString(positionArray));//✅
+//        System.out.printf("%-20s\n",Arrays.toString(averageArray));//✅
+
+
 
         System.out.println(" ");
         System.out.println(equals.repeat(60));
@@ -143,15 +145,15 @@ public class Main {
     }
 
 
-    private static int findIndex(double[] positionArray, double averageArray) {
-//        sortArray(positionArray);
+    private static int findIndex(double[] positionArray, double[] averageArray){
+        sortArray(positionArray);
         for (int ij = 0; ij < positionArray.length; ij++) {
             int i = 0;
             while (i <= positionArray.length) {
-                if (positionArray[i] != averageArray) {
-                    i++;
-                } else if (positionArray[i] == averageArray) {
+                if (averageArray[ij] == positionArray[i]) {
                     return i + 1;
+                } else if (averageArray[ij] != positionArray[i]) {
+                    i++;
                 }
             }
         }
