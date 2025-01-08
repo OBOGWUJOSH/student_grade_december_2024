@@ -107,6 +107,7 @@ public class Main {
                 System.out.printf("%3d%s", studentListB[ii][jj], "     ");
                 totalArray[ii] += studentListB[ii][jj];
                 averageArray[ii] = (double) totalArray[ii] / numberOfSubject;
+                positionArray[ii] = averageArray[ii];
             }
 
             //Total column print out
@@ -115,23 +116,20 @@ public class Main {
             System.out.printf("%3.2f%s", averageArray[ii], "    ");
 
 
-            //Position column print outi;
-            for (int i = 0; i < averageArray.length; i++) {
-                positionArray[i] = averageArray[i];
-            }
-
+            //Position column print out;
+//            int i;
+//            for (i = 0; i < averageArray.length; i++) {
+//
+//            }
+//            position = findIndex(averageArray, positionArray[ii]);
+//            System.out.printf("%2d\n",position);
 
             sortArray(positionArray);
+            System.out.printf("%-20s\n",Arrays.toString(positionArray));//✅
+//            System.out.printf("%-20s\n",Arrays.toString(averageArray));//✅
 
 
-            System.out.printf("%-20s",Arrays.toString(positionArray));//✅
-            System.out.println(" ");
         }
-
-
-//        position = findIndex(averageArray, positionArray[ii]);
-//            System.out.println(position);
-
 
         System.out.println(" ");
         System.out.println(equals.repeat(60));
@@ -139,22 +137,20 @@ public class Main {
     }
 
 
-
-
     private static void sortArray(double[] arr){
         int i;
         for (i = 0; i < arr.length-1; i++) {
             if (arr[i] < arr[i + 1]) {
                 double temp = arr[i];
-                arr[i] = arr[arr.length - 1 - i];
-                arr[arr.length - 1 - i] = temp;
+                arr[i] = arr[i+1];
+                arr[i+1] = temp;
             }
         }
     }
 
 
     private static int findIndex(double[] positionArray, double averageArray) {
-        sortArray(positionArray);
+//        sortArray(positionArray);
         for (int ij = 0; ij < positionArray.length; ij++) {
             int i = 0;
             while (i <= positionArray.length) {
