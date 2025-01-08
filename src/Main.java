@@ -121,11 +121,11 @@ public class Main {
 //            for (i = 0; i < averageArray.length; i++) {
 //
 //            }
-//            position = findIndex(averageArray, positionArray[ii]);
-//            System.out.printf("%2d\n",position);
+            position = findIndex(averageArray, positionArray[ii]);
+            System.out.printf("%2d\n",position);
 
-            sortArray(positionArray);
-            System.out.printf("%-20s\n",Arrays.toString(positionArray));//✅
+//            sortArray(positionArray);
+//            System.out.printf("%-20s\n",Arrays.toString(positionArray));//✅
 //            System.out.printf("%-20s\n",Arrays.toString(averageArray));//✅
 
 
