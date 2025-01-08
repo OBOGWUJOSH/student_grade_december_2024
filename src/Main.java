@@ -52,8 +52,6 @@ public class Main {
 
             for (subjectCounter = 0; subjectCounter < numberOfSubject; subjectCounter++) {
 
-
-                
                 System.out.println("Enter the scores of student " + (studentCounter + 1));
 //
                 System.out.print("subject " + (subjectCounter + 1) + ": ");
@@ -63,12 +61,10 @@ public class Main {
                 System.out.println(successful);
                 System.out.println(" ");
 
-
                 studentListB[studentCounter][subjectCounter] = score;
 
                 System.out.println(" ");
             }
-
         }
 
 
@@ -103,6 +99,7 @@ public class Main {
 //      fix the spacing problem in front of the student
             System.out.printf("%s%3d%s", "Student", (ii + 1), "   ");
 
+
             for (jj = 0; jj < subjectCounter; jj++) {
                 System.out.printf("%3d%s", studentListB[ii][jj], "     ");
                 totalArray[ii] += studentListB[ii][jj];
@@ -124,10 +121,7 @@ public class Main {
             position = findIndex(averageArray, positionArray[ii]);
             System.out.printf("%2d\n",position);
 
-//            sortArray(positionArray);
 //            System.out.printf("%-20s\n",Arrays.toString(positionArray));//✅
-//            System.out.printf("%-20s\n",Arrays.toString(averageArray));//✅
-
 
         }
 
