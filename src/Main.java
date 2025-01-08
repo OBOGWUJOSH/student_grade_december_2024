@@ -120,20 +120,22 @@ public class Main {
                 positionArray[i] = averageArray[i];
             }
 
+
             sortArray(positionArray);
 
-//            System.out.println(Arrays.toString(positionArray));//✅
 
-            position = findIndex(averageArray, positionArray);
-
-            System.out.println(position);
-
+            System.out.printf("%-20s",Arrays.toString(positionArray));//✅
             System.out.println(" ");
         }
 
-        System.out.println(" ");
 
+//        position = findIndex(averageArray, positionArray[ii]);
+//            System.out.println(position);
+
+
+        System.out.println(" ");
         System.out.println(equals.repeat(60));
+
     }
 
 
@@ -151,22 +153,20 @@ public class Main {
     }
 
 
-    private static int findIndex(double[] averageArray, double [] positionArray) {
+    private static int findIndex(double[] positionArray, double averageArray) {
+        sortArray(positionArray);
         for (int ij = 0; ij < positionArray.length; ij++) {
             int i = 0;
-            while (i < positionArray.length) {
-                if (averageArray[ij] != positionArray[i]) {
+            while (i <= positionArray.length) {
+                if (positionArray[i] != averageArray) {
                     i++;
-                } else if (averageArray[ij] == positionArray[i]) {
+                } else if (positionArray[i] == averageArray) {
                     return i + 1;
                 }
             }
         }
         return -1;
     }
-
-
-
 
 
 
