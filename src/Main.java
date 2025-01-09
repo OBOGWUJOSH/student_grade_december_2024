@@ -85,7 +85,6 @@ public class Main {
 
         int ii;
         int jj;
-        int position = 0;
 
         int[] totalArray = new int[numberOfStudent];
         double[] averageArray = new double[totalArray.length];
@@ -94,8 +93,6 @@ public class Main {
 
 //      printing out the Table BODY
         for (ii = 0; ii < studentCounter; ii++) {
-
-
 //      fix the spacing problem in front of the student
             System.out.printf("%s%3d%s", "Student", (ii + 1), "   ");
 
@@ -115,16 +112,16 @@ public class Main {
             //Position column print out;
 //            sortArray(positionArray);
 
-        }
-
-            position = findIndex(averageArray, positionArray);
-            //print out the position
+            int position  = findIndex(averageArray, positionArray);
             System.out.printf("%2d\n",position);
             System.out.println(" ");
 
+        }
+
+
+        //print out the position
 //        System.out.printf("%-20s\n",Arrays.toString(positionArray));//✅
 //        System.out.printf("%-20s\n",Arrays.toString(averageArray));//✅
-
 
 
         System.out.println(" ");
