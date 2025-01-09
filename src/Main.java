@@ -1,5 +1,5 @@
 
-import java.util.Arrays;
+
 import java.util.Scanner;
 
 
@@ -19,7 +19,6 @@ public class Main {
         Scanner scannerOne = new Scanner(System.in);
 
 //        System.out.print("Teachers Name: ");
-
 //        String teacherName = scannerOne.nextLine();
 
 
@@ -39,15 +38,17 @@ public class Main {
         System.out.println(successful);
         System.out.println(" ");
 
-        int studentCounter;
         int subjectCounter = 0;
+        int studentCounter = 0;
+
+        StringBuilder subject = new StringBuilder();
+
 
 
         int[][] studentListB = new int[numberOfStudent][numberOfSubject];
 
 
-        //INPUT COLLECTION POINT
-
+        //INPUT COLLECTION POINT§
         for (studentCounter = 0; studentCounter < numberOfStudent; studentCounter++) {
 
             for (subjectCounter = 0; subjectCounter < numberOfSubject; subjectCounter++) {
@@ -64,22 +65,31 @@ public class Main {
                 studentListB[studentCounter][subjectCounter] = score;
 
                 System.out.println(" ");
+
             }
         }
 
 
-//      PRINTING THE TABLE
-        String subject = ("SUB     ").repeat(numberOfSubject); //Make the SUB  increase
+
+//      PRINTING THE TABLE1
+
+
+
+//            subject = ("SUB"+"     ").repeat(numberOfSubject); //Make the SUB  increase
+
 
 //      printing out the Table HEADER
         System.out.println(equals.repeat(60));
 
-        System.out.print("STUDENTS     " + subject + "TOT     " + "AVE     " + "POS     ");
+
+        for (int i = 0; i <numberOfSubject;i++) {
+            subject.append("SUB ").append(i+1).append("     " );//Make the SUB  increase
+        }
+
+        System.out.printf("%3s","STUDENTS     " + subject + "TOT     " + "AVE     " + "POS     ");
         System.out.println();
 
         System.out.println(equals.repeat(60));
-
-
 
 
 
@@ -93,12 +103,13 @@ public class Main {
 
 //      printing out the Table BODY
         for (ii = 0; ii < studentCounter; ii++) {
-//      fix the spacing problem in front of the student
+//          fix the spacing problem in front of the student
+
             System.out.printf("%s%3d%s", "Student", (ii + 1), "   ");
 
 
             for (jj = 0; jj < subjectCounter; jj++) {
-                System.out.printf("%3d%s", studentListB[ii][jj], "     ");
+                System.out.printf("%3d%s", studentListB[ii][jj], "       ");
                 totalArray[ii] += studentListB[ii][jj];
                 averageArray[ii] = (double) totalArray[ii] / numberOfSubject;
                 positionArray[ii] = averageArray[ii];
@@ -109,24 +120,18 @@ public class Main {
             //Average column print out
             System.out.printf("%3.2f%s", averageArray[ii], "    ");
 
-            //Position column print out;
-//            sortArray(positionArray);
 
+            //Position column print out;
+            sortArray(positionArray);
+
+            //print out the position
             int position  = findIndex(averageArray, positionArray);
             System.out.printf("%2d\n",position);
             System.out.println(" ");
-
         }
-
-
-        //print out the position
-//        System.out.printf("%-20s\n",Arrays.toString(positionArray));//✅
-//        System.out.printf("%-20s\n",Arrays.toString(averageArray));//✅
-
 
         System.out.println(" ");
         System.out.println(equals.repeat(60));
-
     }
 
 
@@ -143,10 +148,11 @@ public class Main {
 
 
     private static int findIndex(double[] positionArray, double[] averageArray){
-        sortArray(positionArray);
+
+//        sortArray(positionArray);
         for (int ij = 0; ij < positionArray.length; ij++) {
             int i = 0;
-            while (i <= positionArray.length) {
+            while (i < positionArray.length) {
                 if (averageArray[ij] == positionArray[i]) {
                     return i + 1;
                 } else if (averageArray[ij] != positionArray[i]) {
@@ -156,9 +162,6 @@ public class Main {
         }
         return -1;
     }
-
-
-
 
     //THIS IS THE CLASS CLOSURE
 }
