@@ -1,9 +1,8 @@
 
-
-import java.sql.SQLOutput;
 import java.util.Arrays;
 import java.util.Scanner;
 
+import static java.util.Arrays.sort;
 
 
 public class Main {
@@ -44,10 +43,8 @@ public class Main {
         int studentCounter = 0;
 
         StringBuilder subject = new StringBuilder();
-
-
-
         int[][] studentList = new int[numberOfStudent][numberOfSubject];
+
 
 
         //INPUT COLLECTION POINT§
@@ -56,7 +53,6 @@ public class Main {
             for (subjectCounter = 0; subjectCounter < numberOfSubject; subjectCounter++) {
 
                 System.out.println("Enter the scores of student " + (studentCounter + 1));
-//
                 System.out.print("subject " + (subjectCounter + 1) + ": ");
                 int score = scannerOne.nextInt();
 
@@ -76,120 +72,131 @@ public class Main {
 //      PRINTING THE TABLE1
 
 //      printing out the Table HEADER
-        System.out.println(equals.repeat(60));
+        System.out.println(equals.repeat(100));
+        for (int i = 0; i < numberOfSubject;i++) {
 
-
-        for (int i = 0; i <numberOfSubject;i++) {
             subject.append("SUB ").append(i+1).append("     " );//Make the SUB  increase
         }
         System.out.printf("%3s","STUDENTS     " + subject + "TOT     " + "AVE     " + "POS     ");
         System.out.println();
 
-        System.out.println(equals.repeat(60));
+        System.out.println(equals.repeat(100));
 
 
-
-        int ii;
-        int jj;
 
         int[] totalArray = new int[numberOfStudent];
         double[] averageArray = new double[totalArray.length];
         double[] positionArray = new double[averageArray.length];
-
-
-        int highestScoringStuPosition = 0;
-        int lowestScoringStuPosition = 0;
-        int lowestIndexPosition = 0;
-
+        int ii;
+        int jj;
 
 //      printing out the Table BODY
         for (ii = 0; ii < studentCounter; ii++) {
-//          fix the spacing problem in front of the student
 
             System.out.printf("%s%3d%s", "Student", (ii + 1), "   ");
-
-
             for (jj = 0; jj < subjectCounter; jj++) {
                 System.out.printf("%3d%s", studentList[ii][jj], "       ");
                 totalArray[ii] += studentList[ii][jj];
-                averageArray[ii] = (double) totalArray[ii] / numberOfSubject;
+                averageArray[ii] = (double) totalArray[ii]/numberOfSubject;
                 positionArray[ii] = averageArray[ii];
             }
 
             //Total column print out
             System.out.printf("%3d%s", totalArray[ii], "    ");
             //Average column print out
-            System.out.printf("%3.2f%s", averageArray[ii], "    ");
+            System.out.printf("%.2f%s", averageArray[ii], "    ");
 
 
-            //Position column print out;
+            //PRINT OUT POSITION COLUMN
             sortArray(positionArray);
 
-            System.out.println(Arrays.toString(averageArray));
-            System.out.println(Arrays.toString(positionArray));
 
-            int position = 0;
-            for (int i = 0; i < averageArray.length; i++) {
 
-                position = Arrays.binarySearch(averageArray, positionArray[i]);
-
+//            System.out.printf("%s", Arrays.toString(positionArray));
+            System.out.print("[ ");
+            for(double numbers : positionArray){
+                System.out.printf("%s%.2f,%s", " ",numbers," ");
             }
+            System.out.print(" ]");
 
-            System.out.printf("%2d\n", position + 1);
+//            for(double numbers : averageArray){
+//                System.out.printf("%s%.2f,%s",numbers, "  ");
+//            }
 
-            //print out the position
-            System.out.println(" ");
+
+
+            int a = 0;
+            int position = 0;
+            for(a = 1; a < positionArray.length; a++) {
+                position = Arrays.binarySearch(positionArray,averageArray[a]);
+            }
+            System.out.printf("%3d\n", position);
         }
 
 
-//        System.out.print(Arrays.toString(positionArray));
-
         System.out.println(" ");
-        System.out.println(equals.repeat(60));
+        System.out.println(equals.repeat(100));
+        System.out.println(equals.repeat(100));
 
 
 
+        //SORT STUDENT LIST
+
+
+        int[] highestScore = new int[studentList.length];
+        int[] highestScoreSorted = new int[studentList.length];
+
+        for (int i = 0; i < studentList.length/2; i++) {
+
+            for (int j = 0; j < studentList.length; j++) {
+                highestScore[j] = studentList[j][i];
+                highestScoreSorted[j] = highestScore[j];
+//                System.out.println(highestScoreSorted[j]);
+            }
+        }
+
+//        System.out.println(Arrays.toString(highestScore));
+        sort(highestScoreSorted);
+        sortArrayInt(highestScoreSorted);
+//        System.out.println(Arrays.toString(highestScoreSorted));
 
 
         //SUBJECT SUMMARY
         for (int subSumCount = 0; subSumCount < numberOfSubject; subSumCount++) {
 
-            System.out.println("Subject " + (subSumCount + 1));
+//            System.out.println(Arrays.deepToString(studentList));
+
+            int lowestIndexPosition = positionArray.length - 1;
+
+            int highestScoringStudentsPosition = 0;
+            int lowestScoringStudentsPosition = numberOfSubject;
 
 
-            lowestIndexPosition = positionArray.length - 1;
-
-            highestScoringStuPosition = 0;
-            lowestScoringStuPosition = 0;
+            System.out.println("Subject " + (subSumCount + 1));//SUBJECT 1
 
             for (int subSumCount2 = 0; subSumCount2 < numberOfSubject; subSumCount2++) {
-
-                highestScoringStuPosition = Arrays.binarySearch(averageArray, (positionArray[0]));
-                lowestScoringStuPosition = Arrays.binarySearch(averageArray, (positionArray[lowestIndexPosition]));
-
-//                System.out.println(Arrays.toString(positionArray));
-//                System.out.println(Arrays.toString(averageArray));
-
+                highestScoringStudentsPosition = Arrays.binarySearch(highestScore, highestScoreSorted[0]);
+                lowestScoringStudentsPosition = Arrays.binarySearch(highestScore, (highestScoreSorted[lowestIndexPosition]));
             }
 
-
-
-            System.out.println("Highest scoring student is student " + (highestScoringStuPosition + 1) + " scoring: " + (positionArray[0]));
-            System.out.println("The lowest scoring student is student " + (lowestScoringStuPosition + 1) + " scoring: " + (positionArray[lowestIndexPosition]));
+            System.out.println("Highest scoring student is student " + (highestScoringStudentsPosition+1) + " scoring: " + (highestScoreSorted[0]));
+            System.out.println("The lowest scoring student is student " + (lowestScoringStudentsPosition+1) + " scoring: " + (highestScoreSorted[lowestIndexPosition]));
             System.out.println("Total Score : #");
             System.out.println("Average Score : #");
             System.out.println("Number of Passes : #");
             System.out.println("Number of Failed Students : #");
-            System.out.println("  ");
-
-            System.out.println(equals.repeat(60));
+//            System.out.println(equals.repeat(60));
+            System.out.println(" ");
         }
 
+        System.out.println("  ");
+        System.out.println(equals.repeat(100));
+        System.out.println(equals.repeat(100));
 
-        System.out.println(" ");
-        System.out.println(equals.repeat(60));
+//        System.out.println(" ");
+//        System.out.println(equals.repeat(60));
+
     }
-
 
 
 
@@ -200,9 +207,26 @@ public class Main {
                 double temp = arr[i];
                 arr[i] = arr[i+1];
                 arr[i+1] = temp;
+            }else if (arr[i] >= arr[i+1]) {
+                i++;
             }
         }
     }
+
+    private static void sortArrayInt(int[] arr){
+        int i;
+        for (i = 0; i < arr.length-1; i++) {
+            if (arr[i] >= arr[i+1]) {
+                i++;
+            }else if (arr[i] < arr[i + 1]) {
+                int temp = arr[i];
+                arr[i] = arr[i+1];
+                arr[i+1] = temp;
+            }
+        }
+    }
+
+
 
 
 //    private static int findIndex(double[] positionArray, double[] averageArray){
