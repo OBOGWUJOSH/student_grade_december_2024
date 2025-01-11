@@ -23,11 +23,11 @@ public class Main {
 //        String teacherName = scannerOne.nextLine();
 
 
-        System.out.print("How Many Students Do You Have: ");
+        System.out.println("How Many Students Do You Have: ");
         int numberOfStudent = scannerOne.nextInt();
 
 
-        System.out.print("How many Subject Do You Offer: ");
+        System.out.println("How many Subject Do You Offer: ");
         int numberOfSubject = scannerOne.nextInt();
 
 
@@ -83,7 +83,6 @@ public class Main {
         System.out.println(equals.repeat(100));
 
 
-
         int[] totalArray = new int[numberOfStudent];
         double[] averageArray = new double[totalArray.length];
         double[] positionArray = new double[averageArray.length];
@@ -108,11 +107,9 @@ public class Main {
 
 
             //PRINT OUT POSITION COLUMN
+            sort(positionArray);
             sortArray(positionArray);
 
-
-
-//            System.out.printf("%s", Arrays.toString(positionArray));
             System.out.print("[ ");
             for(double numbers : positionArray){
                 System.out.printf("%s%.2f,%s", " ",numbers," ");
@@ -123,8 +120,7 @@ public class Main {
 //                System.out.printf("%s%.2f,%s",numbers, "  ");
 //            }
 
-
-
+            //PRINT OUT THE INDEX
             int a = 0;
             int position = 0;
             for(a = 1; a < positionArray.length; a++) {
@@ -141,13 +137,10 @@ public class Main {
 
 
         //SORT STUDENT LIST
-
-
         int[] highestScore = new int[studentList.length];
         int[] highestScoreSorted = new int[studentList.length];
 
         for (int i = 0; i < studentList.length/2; i++) {
-
             for (int j = 0; j < studentList.length; j++) {
                 highestScore[j] = studentList[j][i];
                 highestScoreSorted[j] = highestScore[j];
@@ -155,17 +148,16 @@ public class Main {
             }
         }
 
-//        System.out.println(Arrays.toString(highestScore));
         sort(highestScoreSorted);
         sortArrayInt(highestScoreSorted);
+
 //        System.out.println(Arrays.toString(highestScoreSorted));
+        System.out.println(Arrays.toString(highestScore));
+        System.out.println(Arrays.toString(highestScoreSorted));
 
 
         //SUBJECT SUMMARY
         for (int subSumCount = 0; subSumCount < numberOfSubject; subSumCount++) {
-
-//            System.out.println(Arrays.deepToString(studentList));
-
             int lowestIndexPosition = positionArray.length - 1;
 
             int highestScoringStudentsPosition = 0;
@@ -199,32 +191,35 @@ public class Main {
     }
 
 
-
     private static void sortArray(double[] arr){
-        int i;
-        for (i = 0; i < arr.length-1; i++) {
+//        int i=0;
+        for (int i = 0; i < arr.length-1; i++){
             if (arr[i] < arr[i + 1]) {
-                double temp = arr[i];
-                arr[i] = arr[i+1];
-                arr[i+1] = temp;
-            }else if (arr[i] >= arr[i+1]) {
+                double temp = arr[i + 1];
+                arr[i + 1] = arr[i];
+                arr[i] = temp;
+            } else if (arr[i] > arr[i + 1]) {
                 i++;
             }
         }
     }
+
 
     private static void sortArrayInt(int[] arr){
-        int i;
-        for (i = 0; i < arr.length-1; i++) {
-            if (arr[i] >= arr[i+1]) {
-                i++;
-            }else if (arr[i] < arr[i + 1]) {
-                int temp = arr[i];
-                arr[i] = arr[i+1];
-                arr[i+1] = temp;
+            for (int i = 0; i < arr.length-1; i++){
+                if (arr[i] < arr[i + 1]) {
+                    int temp = arr[i+1];
+                    arr[i+1] = arr[i];
+                    arr[i] = temp;
+                } else {
+                    if (arr[i] < arr[i + 1]) {
+                        continue;
+                    }
+                    i++;
+                }
             }
-        }
     }
+
 
 
 
@@ -243,7 +238,6 @@ public class Main {
 //        }
 //        return -1;
 //    }
-
 
 
     //THIS IS THE END
