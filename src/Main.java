@@ -19,8 +19,12 @@ public class Main {
 
         Scanner scannerOne = new Scanner(System.in);
 
-//        System.out.print("Teachers Name: ");
-//        String teacherName = scannerOne.nextLine();
+/*
+
+        System.out.print("Teachers Name: ");
+        String teacherName = scannerOne.nextLine();
+
+ */
 
 
         System.out.println("How Many Students Do You Have: ");
@@ -29,6 +33,7 @@ public class Main {
 
         System.out.println("How many Subject Do You Offer: ");
         int numberOfSubject = scannerOne.nextInt();
+
 
 
         String greaterThan = ">";
@@ -47,14 +52,20 @@ public class Main {
 
 
 
-        //INPUT COLLECTION POINT§
+        //INPUT COLLECTION POINT
         for (studentCounter = 0; studentCounter < numberOfStudent; studentCounter++) {
 
+            System.out.println("Enter A Score from 0 to 100");
             for (subjectCounter = 0; subjectCounter < numberOfSubject; subjectCounter++) {
+                int score = 0;
 
-                System.out.println("Enter the scores of student " + (studentCounter + 1));
-                System.out.print("subject " + (subjectCounter + 1) + ": ");
-                int score = scannerOne.nextInt();
+                do{
+                    System.out.println("Enter the scores of student " + (studentCounter + 1));
+                    System.out.print("subject " + (subjectCounter + 1) + ": ");
+                    score = scannerOne.nextInt();
+
+                }while(score < 0 || score > 100);
+
 
                 System.out.println(greaterThan.repeat(20));
                 System.out.println(successful);
@@ -69,10 +80,11 @@ public class Main {
 
 
 
-//      PRINTING THE TABLE1
+//      PRINTING THE TABLE
 
-//      printing out the Table HEADER
-        System.out.println(equals.repeat(100));
+//      printing out the Table header
+
+        System.out.println(equals.repeat(110));
         for (int i = 0; i < numberOfSubject;i++) {
 
             subject.append("SUB ").append(i+1).append("     " );//Make the SUB  increase
@@ -83,13 +95,15 @@ public class Main {
         System.out.println(equals.repeat(100));
 
 
+//      PRINTING OUT THE TABLE BODY
+
         int[] totalArray = new int[numberOfStudent];
         double[] averageArray = new double[totalArray.length];
         double[] positionArray = new double[averageArray.length];
+
         int ii;
         int jj;
 
-//      printing out the Table BODY
         for (ii = 0; ii < studentCounter; ii++) {
 
             System.out.printf("%s%3d%s", "Student", (ii + 1), "   ");
@@ -106,9 +120,13 @@ public class Main {
             System.out.printf("%.2f%s", averageArray[ii], "    ");
 
 
-            //PRINT OUT POSITION COLUMN
-            sort(positionArray);
+
+//            PRINT OUT POSITION COLUMN
+
+//            sort(positionArray);
             sortArray(positionArray);
+
+
 
             System.out.print("[ ");
             for(double numbers : positionArray){
@@ -119,6 +137,7 @@ public class Main {
 //            for(double numbers : averageArray){
 //                System.out.printf("%s%.2f,%s",numbers, "  ");
 //            }
+
 
             //PRINT OUT THE INDEX
             int a = 0;
@@ -136,39 +155,43 @@ public class Main {
 
 
 
-        //SORT STUDENT LIST
+//        SORT SUBJECT LIST
+
         int[] highestScore = new int[studentList.length];
         int[] highestScoreSorted = new int[studentList.length];
 
-        for (int i = 0; i < studentList.length/2; i++) {
+        for (int i = 0; i < studentList.length; i++) {
             for (int j = 0; j < studentList.length; j++) {
                 highestScore[j] = studentList[j][i];
                 highestScoreSorted[j] = highestScore[j];
-//                System.out.println(highestScoreSorted[j]);
+                System.out.println(highestScoreSorted[j]);
             }
-        }
+            sortArrayInt(highestScoreSorted);
 
-        sort(highestScoreSorted);
-        sortArrayInt(highestScoreSorted);
+            System.out.println(Arrays.toString(highestScore));
+            System.out.println(Arrays.toString(highestScoreSorted));
 
-//        System.out.println(Arrays.toString(highestScoreSorted));
-        System.out.println(Arrays.toString(highestScore));
-        System.out.println(Arrays.toString(highestScoreSorted));
+            System.out.println(" ");
 
 
-        //SUBJECT SUMMARY
-        for (int subSumCount = 0; subSumCount < numberOfSubject; subSumCount++) {
+
+
+//            SUBJECT SUMMARY
             int lowestIndexPosition = positionArray.length - 1;
 
             int highestScoringStudentsPosition = 0;
             int lowestScoringStudentsPosition = numberOfSubject;
 
 
-            System.out.println("Subject " + (subSumCount + 1));//SUBJECT 1
+            System.out.println("Subject " + (i + 1));//SUBJECT 1
+
 
             for (int subSumCount2 = 0; subSumCount2 < numberOfSubject; subSumCount2++) {
+
                 highestScoringStudentsPosition = Arrays.binarySearch(highestScore, highestScoreSorted[0]);
                 lowestScoringStudentsPosition = Arrays.binarySearch(highestScore, (highestScoreSorted[lowestIndexPosition]));
+
+
             }
 
             System.out.println("Highest scoring student is student " + (highestScoringStudentsPosition+1) + " scoring: " + (highestScoreSorted[0]));
@@ -177,47 +200,60 @@ public class Main {
             System.out.println("Average Score : #");
             System.out.println("Number of Passes : #");
             System.out.println("Number of Failed Students : #");
-//            System.out.println(equals.repeat(60));
             System.out.println(" ");
+
+
+
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         System.out.println("  ");
         System.out.println(equals.repeat(100));
         System.out.println(equals.repeat(100));
 
-//        System.out.println(" ");
-//        System.out.println(equals.repeat(60));
 
     }
 
 
     private static void sortArray(double[] arr){
-//        int i=0;
-        for (int i = 0; i < arr.length-1; i++){
-            if (arr[i] < arr[i + 1]) {
-                double temp = arr[i + 1];
-                arr[i + 1] = arr[i];
-                arr[i] = temp;
-            } else if (arr[i] > arr[i + 1]) {
-                i++;
+        int i;
+        for (i = 0; i < arr.length-1; i++){
+            while (arr[i] < arr[i + 1]){
+                if (arr[i] <= arr[i + 1]) {
+                    double temp = arr[i + 1];
+                    arr[i + 1] = arr[i];
+                    arr[i] = temp;
+                }
+                sortArray(arr);
             }
         }
     }
 
 
     private static void sortArrayInt(int[] arr){
-            for (int i = 0; i < arr.length-1; i++){
-                if (arr[i] < arr[i + 1]) {
-                    int temp = arr[i+1];
-                    arr[i+1] = arr[i];
+        int i;
+        for (i = 0; i < arr.length-1; i++){
+            while (arr[i] < arr[i + 1]){
+                if (arr[i] <= arr[i + 1]) {
+                    int temp = arr[i + 1];
+                    arr[i + 1] = arr[i];
                     arr[i] = temp;
-                } else {
-                    if (arr[i] < arr[i + 1]) {
-                        continue;
-                    }
-                    i++;
                 }
+                sortArrayInt(arr);
             }
+        }
     }
 
 
@@ -238,6 +274,8 @@ public class Main {
 //        }
 //        return -1;
 //    }
+
+
 
 
     //THIS IS THE END
