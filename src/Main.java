@@ -91,7 +91,6 @@ public class Main {
 
 
 //      PRINTING OUT THE TABLE BODY
-
         int[] totalArray = new int[numberOfStudent];
         double[] averageArray = new double[totalArray.length];
         double[] positionArray = new double[averageArray.length];
@@ -129,11 +128,6 @@ public class Main {
             }
             System.out.print(" ]");
 
-//            for(double numbers : averageArray){
-//                System.out.printf("%s%.2f,%s",numbers, "  ");
-//            }
-
-
             //PRINT OUT THE INDEX
             int a;
             int position = 0;
@@ -160,7 +154,7 @@ public class Main {
             for (int j = 0; j < studentList.length; j++) {
                 highestScore[j] = studentList[j][i];
                 highestScoreSorted[j] = highestScore[j];
-                System.out.println(highestScoreSorted[j]);
+//                System.out.println(highestScoreSorted[j]);
             }
 
 
@@ -176,35 +170,36 @@ public class Main {
             }
 
 //            SUBJECT SUMMARY
-            int lowestIndexPosition = positionArray.length - 1;
-            int highestIndexPosition = 0;
-
-            int highestScoringStudentsPosition = 0;
-            int lowestScoringStudentsPosition = 0;
-
-
             System.out.println("Subject " + (i + 1));//PRINT OUT SUBJECT 1
 
+            int highestPositionIndex = 0;
+            int lowestPositionIndex = highestScoreSorted.length;
 
-            for (int subSumCount2 = 0; subSumCount2 < numberOfSubject; subSumCount2++){
-                highestScoringStudentsPosition = Arrays.binarySearch(highestScore, (highestScoreSorted[0]));
-                lowestScoringStudentsPosition = Arrays.binarySearch(highestScore, (highestScoreSorted[lowestIndexPosition]));
-                if (highestScoringStudentsPosition < 0 || lowestScoringStudentsPosition < 0){
-                    highestScoringStudentsPosition = highestIndexPosition;
-                    lowestScoringStudentsPosition = subSumCount2;
-                }
-            }
+            int highestScoringStudentsPosition;
+            int lowestScoringStudentsPosition;
 
-            System.out.println("Highest scoring student is student " + (highestScoringStudentsPosition+1) + " scoring: " + (highestScoreSorted[0]));
-            System.out.println("The lowest scoring student is student " + (lowestScoringStudentsPosition+1) + " scoring: " + (highestScoreSorted[lowestIndexPosition]));
+            highestScoringStudentsPosition = Arrays.binarySearch(highestScore, highestScoreSorted[0]);
+            lowestScoringStudentsPosition = Arrays.binarySearch(highestScore, highestScoreSorted[lowestPositionIndex-1]);
+
+//            for (int subSumCount2 = 0; subSumCount2 < numberOfSubject; subSumCount2++) {
+
+//                if (highestScoringStudentsPosition < 0 || lowestScoringStudentsPosition < 0){
+//                    highestScoringStudentsPosition = highestPositionIndex;
+//                    lowestScoringStudentsPosition = highestPositionIndex;
+//                }
+
+//                }
+
+            System.out.println("Highest scoring student is student " + (highestScoringStudentsPosition + 1) + " scoring: " + (highestScoreSorted[0]));
+            System.out.println("The lowest scoring student is student " + (lowestScoringStudentsPosition + 1) + " scoring: " + (highestScoreSorted[lowestPositionIndex-1]));
             System.out.println("Total Score: " + totalScoreOfSubject);
             System.out.printf("%s%.2f\n","Average Score : " ,averageScoreOfSubject);
             System.out.println("Number of Passes: #");
             System.out.println("Number of Failed Students: #");
             System.out.println(" ");
+
         }
 
-//        System.out.println("  ");
         System.out.println(equals.repeat(100));
         System.out.println(equals.repeat(110));
     }
@@ -223,6 +218,7 @@ public class Main {
             }
         }
     }
+
 
 
     private static void sortArrayInt(int[] arr){
