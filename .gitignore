@@ -2,7 +2,7 @@
 out/
 !**/src/main/**/out/
 !**/src/test/**/out/
-note.txt
+
 
 
 ### Eclipse ###
@@ -30,3 +30,7 @@ bin/
 
 ### Mac OS ###
 .DS_Store
+
+
+# Ignore specific txt file
+./jnote.txt
