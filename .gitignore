@@ -2,7 +2,7 @@
 out/
 !**/src/main/**/out/
 !**/src/test/**/out/
-note/
+note.txt
 
 
 ### Eclipse ###
@@ -30,4 +30,3 @@ bin/
 
 ### Mac OS ###
 .DS_Store
-
