@@ -20,10 +20,8 @@ public class Main {
         Scanner scannerOne = new Scanner(System.in);
 
 /*
-
         System.out.print("Teachers Name: ");
         String teacherName = scannerOne.nextLine();
-
  */
 
 
