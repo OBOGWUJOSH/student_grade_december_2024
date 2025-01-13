@@ -33,4 +33,4 @@ bin/
 
 
 # Ignore specific txt file
-./jnote.txt
+/src/jnote.txt
