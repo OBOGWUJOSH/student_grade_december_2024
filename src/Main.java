@@ -245,8 +245,6 @@ public class Main {
 
 
 
-
-
 //    private static int findIndex(double[] positionArray, double[] averageArray){
 ////        sortArray(positionArray);
 //        for (int ij = 0; ij < positionArray.length; ij++) {
