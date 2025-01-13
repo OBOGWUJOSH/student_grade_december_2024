@@ -148,10 +148,10 @@ public class Main {
             System.out.printf("%3d\n", position);
         }
 
-
         System.out.println(" ");
         System.out.println(equals.repeat(100));
-        System.out.println(equals.repeat(100));
+        System.out.println(equals.repeat(110));
+
 
 
 
@@ -175,7 +175,6 @@ public class Main {
 
 
 
-
 //            SUBJECT SUMMARY
             int lowestIndexPosition = positionArray.length - 1;
 
@@ -185,13 +184,10 @@ public class Main {
 
             System.out.println("Subject " + (i + 1));//SUBJECT 1
 
-
             for (int subSumCount2 = 0; subSumCount2 < numberOfSubject; subSumCount2++) {
 
                 highestScoringStudentsPosition = Arrays.binarySearch(highestScore, highestScoreSorted[0]);
                 lowestScoringStudentsPosition = Arrays.binarySearch(highestScore, (highestScoreSorted[lowestIndexPosition]));
-
-
             }
 
             System.out.println("Highest scoring student is student " + (highestScoringStudentsPosition+1) + " scoring: " + (highestScoreSorted[0]));
@@ -221,7 +217,7 @@ public class Main {
 
         System.out.println("  ");
         System.out.println(equals.repeat(100));
-        System.out.println(equals.repeat(100));
+        System.out.println(equals.repeat(110));
 
 
     }
