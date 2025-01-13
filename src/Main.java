@@ -202,9 +202,6 @@ public class Main {
             System.out.println("Number of Passes: #");
             System.out.println("Number of Failed Students: #");
             System.out.println(" ");
-
-
-
         }
 
 //        System.out.println("  ");
