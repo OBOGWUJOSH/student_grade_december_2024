@@ -189,6 +189,7 @@ public class Main {
                         lowestScoringStudentsPosition = k;
                     }
                 }
+
             }
 
 
