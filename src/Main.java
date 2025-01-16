@@ -151,10 +151,11 @@ public class Main {
             for (int j = 0; j < studentList.length; j++) {
                 highestScore[j] = studentList[j][i];
                 highestScoreSorted[j] = highestScore[j];
-//                System.out.println(highestScoreSorted[j]);
+                System.out.println(highestScoreSorted[j]);
             }
 
             sortArrayInt(highestScoreSorted);
+
 
             System.out.println(Arrays.toString(highestScore));
             System.out.println(Arrays.toString(highestScoreSorted));
@@ -172,23 +173,24 @@ public class Main {
             int highestPositionIndex = 0;
             int lowestPositionIndex = numberOfSubject - 1;
 
-            int highestScoringStudentsPosition;
-            int lowestScoringStudentsPosition;
 
 //            highestScoringStudentsPosition = Arrays.binarySearch(highestScore, highestScoreSorted[0]);
 //            lowestScoringStudentsPosition = Arrays.binarySearch(highestScore, highestScoreSorted[lowestPositionIndex]);
 
-            highestScoringStudentsPosition = Arrays.binarySearch(highestScore, highestScoreSorted[0]);
-            lowestScoringStudentsPosition = Arrays.binarySearch(highestScore, highestScoreSorted[lowestPositionIndex]);
+            int highestScoringStudentsPosition = 0;
+            int lowestScoringStudentsPosition = 0;
 
+            for (int j = 0; j < numberOfSubject; j++) {
+                for (int k = 0; k < numberOfSubject; k++){
+                    if(highestScoreSorted[0] == highestScore[k]){
+                        highestScoringStudentsPosition = k;
+                    }
+                    if(highestScoreSorted[numberOfStudent-1] == highestScore[k]){
+                        lowestScoringStudentsPosition = k;
+                    }
+                }
+            }
 
-//            for (int subSumCount = 0; subSumCount < numberOfSubject; subSumCount++) {
-//                if (highestScoringStudentsPosition < 0 || lowestScoringStudentsPosition < 0) {
-//                    highestScoringStudentsPosition = highestPositionIndex;
-//                    lowestScoringStudentsPosition = highestPositionIndex;
-//
-//                }
-//            }
 
             System.out.println("Highest scoring student is student " + (highestScoringStudentsPosition + 1) + " scoring: " + (highestScoreSorted[0]));
             System.out.println("The lowest scoring student is student " + (lowestScoringStudentsPosition + 1) + " scoring: " + (highestScoreSorted[lowestPositionIndex]));
