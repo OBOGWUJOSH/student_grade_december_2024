@@ -179,16 +179,8 @@ public class Main {
 //            lowestScoringStudentsPosition = Arrays.binarySearch(highestScore, highestScoreSorted[lowestPositionIndex]);
 
             highestScoringStudentsPosition = Arrays.binarySearch(highestScore, highestScoreSorted[0]);
-            lowestScoringStudentsPosition = Arrays.binarySearch(highestScore, highestScoreSorted[lowestPositionIndex]);
+            lowestScoringStudentsPosition = Arrays.binarySearch(highestScore, highestScoreSorted[lowestPositionIndex-1]);
 
-
-//            for (int subSumCount = 0; subSumCount < numberOfSubject; subSumCount++) {
-//                if (highestScoringStudentsPosition < 0 || lowestScoringStudentsPosition < 0) {
-//                    highestScoringStudentsPosition = highestPositionIndex;
-//                    lowestScoringStudentsPosition = highestPositionIndex;
-//
-//                }
-//            }
 
             System.out.println("Highest scoring student is student " + (highestScoringStudentsPosition + 1) + " scoring: " + (highestScoreSorted[0]));
             System.out.println("The lowest scoring student is student " + (lowestScoringStudentsPosition + 1) + " scoring: " + (highestScoreSorted[lowestPositionIndex]));
