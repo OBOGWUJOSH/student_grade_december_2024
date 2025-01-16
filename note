@@ -1,7 +1,1 @@
-- FIX EXCEPTIONS
 
-- Fix the error with the print out of the index when you input the largest number as the first or the smalest number as
-    the last number it gives a negative value error.
-- fix the ability to have multiple students having the same scores and stating that there where multiple students with the same score.
-- fix the code into modules and classes
--
