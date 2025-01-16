@@ -35,3 +35,4 @@ bin/
 # Ignore specific txt file
 /src/jnote.txt
 /src/note
+/note
