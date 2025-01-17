@@ -114,7 +114,9 @@ public class Main {
                 totalArray[ii] += studentList[ii][jj];
                 averageArray[ii] = (double) totalArray[ii]/numberOfSubject;
                 positionArray[ii] = averageArray[ii];
+
             }
+
 
             //Total column print out
             System.out.printf("%3d%s", totalArray[ii], "    ");
@@ -124,10 +126,11 @@ public class Main {
 
 
 //            PRINT OUT POSITION COLUMN
-
-//            sort(positionArray);
             sortArray(positionArray);
 
+            if (positionArray[ii -1] == averageArray[jj-1]) {
+                System.out.printf("%3d\n", ii + 1);
+            }
 
             System.out.print("[ ");
             for(double numbers : positionArray){
@@ -135,21 +138,21 @@ public class Main {
             }
             System.out.print(" ]");
 
+
             //PRINT OUT THE INDEX
-            int a;
-            int position = 0;
-            for(a = 1; a < positionArray.length; a++) {
-                position = Arrays.binarySearch(positionArray,averageArray[a]);
-            }
-            System.out.printf("%3d\n", position);
+
         }
+//
+
+
+
 
         System.out.println(" ");
         System.out.println(equals.repeat(100));
         System.out.println(equals.repeat(110));
 
 
-//        SORT SUBJECT LIST
+//      PRINTING SUBJECT SUMMARY
         int[] highestScore = new int[studentList.length];
         int[] highestScoreSorted = new int[studentList.length];
         int totalScoreOfSubject = 0;
@@ -161,9 +164,7 @@ public class Main {
                 highestScoreSorted[j] = highestScore[j];
 //                System.out.println(highestScoreSorted[j]);
             }
-
             sortArrayInt(highestScoreSorted);
-
 
             System.out.println(" ");
             System.out.println(Arrays.toString(highestScore));
@@ -250,6 +251,10 @@ public class Main {
                 sortArrayInt(arr);
             }
         }
+    }
+
+    private String int positionMethod(){
+
     }
 
 
