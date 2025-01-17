@@ -1,5 +1,6 @@
 
 import java.util.Arrays;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 
@@ -44,9 +45,8 @@ public class Main {
         int subjectCounter = 0;
         int studentCounter;
 
-        StringBuilder subject = new StringBuilder();
-        int[][] studentList = new int[numberOfStudent][numberOfSubject];
 
+        int[][] studentList = new int[numberOfStudent][numberOfSubject];
 
 
         //INPUT COLLECTION POINT
@@ -54,14 +54,22 @@ public class Main {
 
             System.out.println("Enter A Score from 0 to 100");
             for (subjectCounter = 0; subjectCounter < numberOfSubject; subjectCounter++) {
-                int score;
+                int score=0;
 
-                do{
-                    System.out.println("Enter the scores of student " + (studentCounter + 1));
-                    System.out.print("subject " + (subjectCounter + 1) + ": ");
-                    score = scannerOne.nextInt();
+                do {
+//                    try {
+                        System.out.println("Enter the scores of student " + (studentCounter + 1));
+                        System.out.print("subject " + (subjectCounter + 1) + ": ");
+                        score = scannerOne.nextInt();
+                        if (score < 0 || score > 100) {
+                            System.out.println("Score must be between 0 and 100.");
+                        }
+//                    } catch (InputMismatchException ime) {
+//                        System.out.println("Invalid input! Please enter a number between 0 and 100.");
+//                        scannerOne.nextLine(); // clear the input buffer
+//                    }
+                }while (score < 0 || score > 100);
 
-                }while(score < 0 || score > 100);
 
 
                 System.out.println(greaterThan.repeat(20));
@@ -76,10 +84,10 @@ public class Main {
         }
 
 
-
 //      PRINTING THE TABLE
 
-//      printing out the Table header
+        StringBuilder subject = new StringBuilder();
+
         System.out.println(equals.repeat(110));
         for (int i = 0; i < numberOfSubject;i++) {
             subject.append("SUB ").append(i+1).append("     " );//Make the SUB  increase
@@ -151,15 +159,17 @@ public class Main {
             for (int j = 0; j < studentList.length; j++) {
                 highestScore[j] = studentList[j][i];
                 highestScoreSorted[j] = highestScore[j];
-                System.out.println(highestScoreSorted[j]);
+//                System.out.println(highestScoreSorted[j]);
             }
 
             sortArrayInt(highestScoreSorted);
 
 
+            System.out.println(" ");
             System.out.println(Arrays.toString(highestScore));
             System.out.println(Arrays.toString(highestScoreSorted));
             System.out.println(" ");
+
 
             for (int scores : highestScoreSorted) {
                 totalScoreOfSubject += scores;
@@ -167,18 +177,17 @@ public class Main {
             }
 
 
-//            SUBJECT SUMMARY
+//          SUBJECT SUMMARY
             System.out.println("Subject " + (i + 1));//PRINT OUT SUBJECT 1
 
             int highestPositionIndex = 0;
             int lowestPositionIndex = numberOfSubject - 1;
 
-
-//            highestScoringStudentsPosition = Arrays.binarySearch(highestScore, highestScoreSorted[0]);
-//            lowestScoringStudentsPosition = Arrays.binarySearch(highestScore, highestScoreSorted[lowestPositionIndex]);
-
             int highestScoringStudentsPosition = 0;
             int lowestScoringStudentsPosition = 0;
+
+            int numberOfStudentThatPassed = 0;
+            int numberOfStudentThatFailed = 0;
 
             for (int j = 0; j < numberOfSubject; j++) {
                 for (int k = 0; k < numberOfSubject; k++){
@@ -189,7 +198,15 @@ public class Main {
                         lowestScoringStudentsPosition = k;
                     }
                 }
+            }
 
+            for (int score : highestScoreSorted){
+                int passMark = 80;
+                if (score > passMark){
+                    numberOfStudentThatPassed+=1;
+                } else if (score < passMark) {
+                    numberOfStudentThatFailed+=1;
+                }
             }
 
 
@@ -197,8 +214,8 @@ public class Main {
             System.out.println("The lowest scoring student is student " + (lowestScoringStudentsPosition + 1) + " scoring: " + (highestScoreSorted[lowestPositionIndex]));
             System.out.println("Total Score: " + totalScoreOfSubject);
             System.out.printf("%s%.2f\n", "Average Score : ", averageScoreOfSubject);
-            System.out.println("Number of Passes: #");
-            System.out.println("Number of Failed Students: #");
+            System.out.println("Number of Passes: " + numberOfStudentThatPassed);
+            System.out.println("Number of Failed Students: " + numberOfStudentThatFailed);
             System.out.println(" ");
         }
 
@@ -220,8 +237,6 @@ public class Main {
             }
         }
     }
-
-
 
     private static void sortArrayInt(int[] arr){
         int i;
