@@ -1,6 +1,5 @@
 
 import java.util.Arrays;
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 
@@ -54,7 +53,7 @@ public class Main {
 
             System.out.println("Enter A Score from 0 to 100");
             for (subjectCounter = 0; subjectCounter < numberOfSubject; subjectCounter++) {
-                int score=0;
+                int score;
 
                 do {
 //                    try {
@@ -109,12 +108,12 @@ public class Main {
         for (ii = 0; ii < studentCounter; ii++) {
 
             System.out.printf("%s%3d%s", "Student", (ii + 1), "   ");
+
             for (jj = 0; jj < subjectCounter; jj++) {
                 System.out.printf("%3d%s", studentList[ii][jj], "       ");
                 totalArray[ii] += studentList[ii][jj];
                 averageArray[ii] = (double) totalArray[ii]/numberOfSubject;
                 positionArray[ii] = averageArray[ii];
-
             }
 
 
@@ -124,32 +123,32 @@ public class Main {
             System.out.printf("%.2f%s", averageArray[ii], "    ");
 
 
-
 //            PRINT OUT POSITION COLUMN
+
             sortArray(positionArray);
 
-            if (positionArray[ii -1] == averageArray[jj-1]) {
-                System.out.printf("%3d\n", ii + 1);
-            }
 
             System.out.print("[ ");
             for(double numbers : positionArray){
-                System.out.printf("%s%.2f,%s", " ",numbers," ");
+                if (numbers == averageArray[ii]){
+                    System.out.printf("%s%.2f,%s", " ",numbers," ");
+                }
             }
             System.out.print(" ]");
 
 
-            //PRINT OUT THE INDEX
-
+            for(double numbers : positionArray) {
+                if (numbers == averageArray[ii]) {
+                    System.out.printf("%3d\n", ii + 1);
+                }
+            }
         }
-//
-
-
 
 
         System.out.println(" ");
         System.out.println(equals.repeat(100));
         System.out.println(equals.repeat(110));
+
 
 
 //      PRINTING SUBJECT SUMMARY
@@ -181,7 +180,7 @@ public class Main {
 //          SUBJECT SUMMARY
             System.out.println("Subject " + (i + 1));//PRINT OUT SUBJECT 1
 
-            int highestPositionIndex = 0;
+//            int highestPositionIndex = 0;
             int lowestPositionIndex = numberOfSubject - 1;
 
             int highestScoringStudentsPosition = 0;
@@ -253,28 +252,9 @@ public class Main {
         }
     }
 
-    private String int positionMethod(){
-
-    }
-
-
-
-
-//    private static int findIndex(double[] positionArray, double[] averageArray){
-////        sortArray(positionArray);
-//        for (int ij = 0; ij < positionArray.length; ij++) {
-//            int i = 0;
-//            while (i < positionArray.length) {
-//                if (averageArray[ij] == positionArray[i]) {
-//                    return i + 1;
-//                } else if (averageArray[ij] != positionArray[i]) {
-//                    i++;
-//                }
-//            }
-//        }
-//        return -1;
+//    private String int positionMethod(int [] arr, int [] arr){
+//
 //    }
-
 
 
 
