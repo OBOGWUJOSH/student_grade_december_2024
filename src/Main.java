@@ -116,35 +116,35 @@ public class Main {
                 positionArray[ii] = averageArray[ii];
             }
 
-
             //Total column print out
             System.out.printf("%3d%s", totalArray[ii], "    ");
             //Average column print out
             System.out.printf("%.2f%s", averageArray[ii], "    ");
 
-
 //            PRINT OUT POSITION COLUMN
+
 
             sortArray(positionArray);
 
+            //printing out array indexes[temporary]
 
             System.out.print("[ ");
-            for(double numbers : positionArray){
-                if (numbers == averageArray[ii]){
-                    System.out.printf("%s%.2f,%s", " ",numbers," ");
+            for(int x = 0; x < positionArray.length; x++){
+                for (double numbers : averageArray) {
+                    if (numbers == positionArray[x]) {
+                        System.out.printf("%s%.2f,%s", " ", numbers, " ");
+                    }
                 }
             }
             System.out.print(" ]");
 
+            // printing out the position here
 
-            for(double numbers : positionArray) {
-                if (numbers == averageArray[ii]) {
-                    System.out.printf("%3d\n", ii + 1);
-                }
-            }
+            int position;
+            position = positionMethod(positionArray,averageArray);
+            System.out.println(position);
+
         }
-
-
         System.out.println(" ");
         System.out.println(equals.repeat(100));
         System.out.println(equals.repeat(110));
@@ -165,10 +165,10 @@ public class Main {
             }
             sortArrayInt(highestScoreSorted);
 
-            System.out.println(" ");
-            System.out.println(Arrays.toString(highestScore));
-            System.out.println(Arrays.toString(highestScoreSorted));
-            System.out.println(" ");
+//            System.out.println(" ");
+//            System.out.println(Arrays.toString(highestScore));
+//            System.out.println(Arrays.toString(highestScoreSorted));
+//            System.out.println(" ");
 
 
             for (int scores : highestScoreSorted) {
@@ -200,6 +200,8 @@ public class Main {
                 }
             }
 
+
+
             for (int score : highestScoreSorted){
                 int passMark = 80;
                 if (score > passMark){
@@ -219,9 +221,15 @@ public class Main {
             System.out.println(" ");
         }
 
+
+
+
+
         System.out.println(equals.repeat(100));
         System.out.println(equals.repeat(110));
     }
+
+
 
 
     private static void sortArray(double[] arr){
@@ -252,9 +260,19 @@ public class Main {
         }
     }
 
-//    private String int positionMethod(int [] arr, int [] arr){
-//
-//    }
+    private static int positionMethod (double [] sortedArr, double [] unsortedArr) {
+        int pos = 0;
+        for (int i = 0; i < sortedArr.length; i++) {
+            for (double scores : unsortedArr) {
+                if (sortedArr[i] == scores) {
+//                    pos = i + 1;
+                    pos = i;
+                    break;
+                }
+            }
+        }
+        return pos;
+    }
 
 
 
