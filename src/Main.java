@@ -200,6 +200,12 @@ public class Main {
                 }
             }
 
+            for (int j = 0; j < highestScoreSorted.length; j++) {
+                highScores[j] = numberOfStudentThatPassed;
+                lowScores[j] = numberOfStudentThatFailed;
+
+            }
+
             System.out.println("Highest scoring student is student " + (highestScoringStudentsPosition + 1) + " scoring: " + (highestScoreSorted[0]));
             System.out.println("The lowest scoring student is student " + (lowestScoringStudentsPosition + 1) + " scoring: " + (highestScoreSorted[lowestPositionIndex]));
             System.out.println("Total Score: " + totalScoreOfSubject);
