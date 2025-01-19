@@ -191,6 +191,10 @@ public class Main {
                 }
             }
 
+            int [] highScores = new int[numberOfStudentThatPassed];
+            int [] lowScores = new int[numberOfStudentThatFailed];
+
+
             for (int score : highestScoreSorted){
                 int passMark = 80;
                 if (score > passMark){
