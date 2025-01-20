@@ -191,25 +191,38 @@ public class Main {
                 }
             }
 
-            int [] highScores = new int[numberOfStudentThatPassed];
-            int [] lowScores = new int[numberOfStudentThatFailed];
+            int [] highScores = new int[highestScoreSorted.length];
+            int [] lowScores = new int[highestScoreSorted.length];
+
+            int easySubject = 0;
+            int hardSubject = 0;
+            int passMark = 80;
 
 
             for (int score : highestScoreSorted){
-                int passMark = 80;
                 if (score > passMark){
                     numberOfStudentThatPassed+=1;
+
                 } else if (score < passMark) {
                     numberOfStudentThatFailed+=1;
                 }
             }
 
-            for (int j = 0; j < highestScoreSorted.length; j++) {
-                highScores[j] = numberOfStudentThatPassed;
-                lowScores[j] = numberOfStudentThatFailed;
-
+            for (int score : highestScore){
+                if (score > passMark){
+                    numberOfStudentThatPassed+=1;
+                } else if (score < passMark) {
+                    numberOfStudentThatFailed+=1;
+                }
+                if (numberOfStudentThatPassed > numberOfStudentThatFailed){
+                    easySubject+=1;
+                }else if (numberOfStudentThatFailed>numberOfStudentThatPassed){
+                    hardSubject+=1;
+                }
             }
 
+
+//          SUBJECT SUMMARY
             System.out.println("Highest scoring student is student " + (highestScoringStudentsPosition + 1) + " scoring: " + (highestScoreSorted[0]));
             System.out.println("The lowest scoring student is student " + (lowestScoringStudentsPosition + 1) + " scoring: " + (highestScoreSorted[lowestPositionIndex]));
             System.out.println("Total Score: " + totalScoreOfSubject);
@@ -217,42 +230,42 @@ public class Main {
             System.out.println("Number of Passes: " + numberOfStudentThatPassed);
             System.out.println("Number of Failed Students: " + numberOfStudentThatFailed);
             System.out.println(" ");
+
+
+            System.out.println(equals.repeat(100));
+            System.out.println(equals.repeat(110));
+
+
+            System.out.printf("%s%d%s%d%s\n","The Hardest Subject is Subject ", hardSubject , " with ", numberOfStudentThatFailed ," failures ");
+            System.out.printf("%s%d%s%d%s\n","The Easiest Subject is Subject ", easySubject , " with ", numberOfStudentThatPassed ," passes ");
+            System.out.printf("%s%d%s%d%s%d\n","The overall Highest score is scored by student ", 1234, " in subject ", 1234 ," scoring ", 1234 );
+            System.out.printf("%s%d%s%d%s%d\n","The overall Lowest score is scored by student ", 1234, " in subject ", 1234 ," scoring ", 1234 );
+
+            System.out.println(equals.repeat(110));
+
+            System.out.println("\n");
+            System.out.println("CLASS SUMMARY");
+            System.out.println(equals.repeat(110));
+
+            System.out.printf("%s%d%s%d\n","The Best Graduating Student is : Student ", 1234 , " scoring " , 1234 );
+
+            System.out.println(equals.repeat(110));
+
+            System.out.println(" ");
+            System.out.println(exclamation.repeat(110));
+
+            System.out.printf("%s%d%s%d\n","Worst Graduating Student is : Student ", 1234, " scoring " , 1234);
+
+            System.out.println(exclamation.repeat(110));
+            System.out.println(" ");
+
+            System.out.println(equals.repeat(110));
+
+            System.out.printf("%s%d\n","Class Total Score is   : ", 1234 );
+            System.out.printf("%s%d\n","Class Average Score is : ", 1234 );
+
+            System.out.println(equals.repeat(110));
         }
-
-
-        System.out.println(equals.repeat(100));
-        System.out.println(equals.repeat(110));
-
-
-        System.out.printf("%s%d%s%d%s\n","The Hardest Subject is Subject ", 1234 , " with ", 1234 ," failures ");
-        System.out.printf("%s%d%s%d%s\n","The Easiest Subject is Subject ", 1234 , " with ", 1234 ," passes ");
-        System.out.printf("%s%d%s%d%s%d\n","The overall Highest score is scored by student ", 1234, " in subject ", 1234 ," scoring ", 1234 );
-        System.out.printf("%s%d%s%d%s%d\n","The overall Lowest score is scored by student ", 1234, " in subject ", 1234 ," scoring ", 1234 );
-
-        System.out.println(equals.repeat(110));
-
-        System.out.println("\n");
-        System.out.println("CLASS SUMMARY");
-        System.out.println(equals.repeat(110));
-
-        System.out.printf("%s%d%s%d\n","The Best Graduating Student is : Student ", 1234 , " scoring " , 1234 );
-
-        System.out.println(equals.repeat(110));
-
-        System.out.println(" ");
-        System.out.println(exclamation.repeat(110));
-
-        System.out.printf("%s%d%s%d\n","Worst Graduating Student is : Student ", 1234, " scoring " , 1234);
-
-        System.out.println(exclamation.repeat(110));
-        System.out.println(" ");
-
-        System.out.println(equals.repeat(110));
-
-        System.out.printf("%s%d\n","Class Total Score is   : ", 1234 );
-        System.out.printf("%s%d\n","Class Average Score is : ", 1234 );
-
-        System.out.println(equals.repeat(110));
 
 
     }
