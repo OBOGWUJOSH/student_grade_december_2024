@@ -235,7 +235,6 @@ public class Main {
             System.out.println(equals.repeat(100));
             System.out.println(equals.repeat(110));
 
-
             System.out.printf("%s%d%s%d%s\n","The Hardest Subject is Subject ", hardSubject , " with ", numberOfStudentThatFailed ," failures ");
             System.out.printf("%s%d%s%d%s\n","The Easiest Subject is Subject ", easySubject , " with ", numberOfStudentThatPassed ," passes ");
             System.out.printf("%s%d%s%d%s%d\n","The overall Highest score is scored by student ", 1234, " in subject ", 1234 ," scoring ", 1234 );
