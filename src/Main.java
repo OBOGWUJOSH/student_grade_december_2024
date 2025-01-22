@@ -1,4 +1,3 @@
-import java.util.Arrays;
 import java.util.Scanner;
 
 
@@ -29,6 +28,7 @@ public class Main {
         int numberOfSubject = scannerOne.nextInt();
 
 
+
         String greaterThan = ">";
         String equals = "=";
         String exclamation = "!";
@@ -53,14 +53,18 @@ public class Main {
                 int score;
 
                 do {
-                    System.out.println("Enter the scores of student " + (studentCounter + 1));
-                    System.out.print("subject " + (subjectCounter + 1) + ": ");
-                    score = scannerOne.nextInt();
-                    if (score < 0 || score > 100) {
-                        System.out.println("Score must be between 0 and 100.");
-                    }
-
-                } while (score < 0 || score > 100);
+//                    try {
+                        System.out.println("Enter the scores of student " + (studentCounter + 1));
+                        System.out.print("subject " + (subjectCounter + 1) + ": ");
+                        score = scannerOne.nextInt();
+                        if (score < 0 || score > 100) {
+                            System.out.println("Score must be between 0 and 100.");
+                        }
+//                    } catch (InputMismatchException ime) {
+//                        System.out.println("Invalid input! Please enter a number between 0 and 100.");
+//                        scannerOne.nextLine(); // clear the input buffer
+//                    }
+                }while (score < 0 || score > 100);
 
                 System.out.println(greaterThan.repeat(20));
                 System.out.println(successful);
@@ -75,12 +79,12 @@ public class Main {
         StringBuilder subject = new StringBuilder();
 
         System.out.println(equals.repeat(110));
+        for (int i = 0; i < numberOfSubject;i++) {
 
-        for (int i = 0; i < numberOfSubject; i++) {
-            subject.append("SUB ").append(i + 1).append("     ");//Make the SUB  increase
+            subject.append("SUB ").append(i+1).append("     " );//Make the SUB  increase
         }
 
-        System.out.printf("%3s", "STUDENTS     " + subject + "TOT     " + "AVE     " + "POS     ");
+        System.out.printf("%3s","STUDENTS     " + subject + "TOT     " + "AVE     " + "POS     ");
         System.out.println();
 
         System.out.println(equals.repeat(100));
@@ -101,7 +105,7 @@ public class Main {
             for (jj = 0; jj < subjectCounter; jj++) {
                 System.out.printf("%3d%s", studentList[ii][jj], "       ");
                 totalArray[ii] += studentList[ii][jj];
-                averageArray[ii] = (double) totalArray[ii] / numberOfSubject;
+                averageArray[ii] = (double) totalArray[ii]/numberOfSubject;
                 positionArray[ii] = averageArray[ii];
             }
 
@@ -114,26 +118,30 @@ public class Main {
 //          PRINT OUT POSITION COLUMN
             sortArray(positionArray);
 
-//          printing out array indexes[temporary]
-            System.out.print("[");
-            for (int x = 0; x < positionArray.length; x++) {
+//            printing out array indexes[temporary]
+
+            System.out.print("[ ");
+            for(int x = 0; x < positionArray.length; x++){
                 for (double numbers : averageArray) {
                     if (numbers == positionArray[x]) {
                         System.out.printf("%.2f,%s ", positionArray[x], " ");
                     }
                 }
             }
-            System.out.print("]");
+            System.out.print(" ]");
 
 
 //             printing out the position here
             int position;
-            position = positionMethod(positionArray, averageArray);
+            position = positionMethod(positionArray,averageArray);
             System.out.println(position);
+
         }
+
         System.out.println(" ");
         System.out.println(equals.repeat(100));
         System.out.println(equals.repeat(110));
+
 
 
 //      PRINTING SUBJECT SUMMARY
@@ -148,52 +156,62 @@ public class Main {
 
         int lowestPositionIndex = numberOfSubject - 1;
 
+        int highestScoringStudentsPosition = 0;
+        int lowestScoringStudentsPosition = 0;
 
         int easySubject = 0;
         int hardSubject = 0;
         int passMark = 80;
 
-        int highestScoringStudentsPosition = 0;
-        int lowestScoringStudentsPosition = 0;
-
-
         for (int i = 0; i < studentList.length; i++) {
 
+            for (int j = 0; j < studentList.length; j++) {
+                highestScore[j] = studentList[j][i];
+                highestScoreSorted[j] = highestScore[j];
+            }
+
+            sortArrayInt(highestScoreSorted);
+
+
+//            System.out.println(" ");
+//            System.out.println(Arrays.toString(highestScore));
+//            System.out.println(Arrays.toString(highestScoreSorted));
+//            System.out.println(" ");
+
+
+            for (int scores : highestScoreSorted) {
+                totalScoreOfSubject += scores;
+                averageScoreOfSubject = (double) totalScoreOfSubject / numberOfSubject;
+            }
+
+
+//          SUBJECT SUMMARY
             System.out.println("Subject " + (i + 1));//PRINT OUT SUBJECT 1
 
-            for (int q = 0; q < studentList.length; q++) {
-                highestScore[q] = studentList[q][i];
-                highestScoreSorted[q] = highestScore[q];
-                sortArrayInt(highestScoreSorted);
-                for (int scores : highestScoreSorted) {
-                    totalScoreOfSubject += scores;
-                    averageScoreOfSubject = (double) totalScoreOfSubject / numberOfSubject;
+
+
+            for (int j = 0; j < numberOfSubject; j++) {
+                for (int k = 0; k < numberOfSubject; k++) {
+                    if (highestScoreSorted[0] == highestScore[k]) {
+                        highestScoringStudentsPosition = k;
+                    }
+                    if (highestScoreSorted[numberOfStudent - 1] == highestScore[k]) {
+                        lowestScoringStudentsPosition = k;
+                    }
                 }
             }
 
-            System.out.println(" ");
-            System.out.println(Arrays.toString(highestScore));
-            System.out.println(Arrays.toString(highestScoreSorted));
-            System.out.println(" ");
-
-            if (highestScore[i] == highestScoreSorted[0]) {
-                highestScoringStudentsPosition = i;
-            }
-            else if (highestScoreSorted[numberOfStudent - 1] == highestScore[i]) {
-                lowestScoringStudentsPosition = i;
-            }
+//            int [] highScores = new int[highestScoreSorted.length];
+//            int [] lowScores = new int[highestScoreSorted.length];
 
 
             for (int score : highestScoreSorted) {
                 if (score > passMark) {
                     numberOfStudentThatPassed += 1;
-                }
-                if (score < passMark) {
+
+                } else if (score < passMark) {
                     numberOfStudentThatFailed += 1;
                 }
-            }
-
-            for (int p = 0; p < numberOfSubject; p++) {
                 if (numberOfStudentThatPassed > numberOfStudentThatFailed) {
                     easySubject += 1;
                 } else if (numberOfStudentThatFailed > numberOfStudentThatPassed) {
@@ -201,7 +219,7 @@ public class Main {
                 }
             }
 
-//              SUBJECT SUMMARY
+//          SUBJECT SUMMARY
             System.out.println("Highest scoring student is student " + (highestScoringStudentsPosition + 1) + " scoring: " + (highestScoreSorted[0]));
             System.out.println("The lowest scoring student is student " + (lowestScoringStudentsPosition + 1) + " scoring: " + (highestScoreSorted[lowestPositionIndex]));
             System.out.println("Total Score: " + totalScoreOfSubject);
@@ -212,64 +230,45 @@ public class Main {
 
         }
 
-//          SUBJECT SUMMARY
 
-//        for (int j = 0; j < numberOfSubject; j++) {
-//
-//
-//              for (int k = 0; k < numberOfSubject; k++) {
+        System.out.println(equals.repeat(100));
+        System.out.println(equals.repeat(110));
+
+        System.out.printf("%s%d%s%d%s\n","The Hardest Subject is Subject ", hardSubject , " with ", numberOfStudentThatFailed ," failures ");
+        System.out.printf("%s%d%s%d%s\n","The Easiest Subject is Subject ", easySubject , " with ", numberOfStudentThatPassed ," passes ");
+        System.out.printf("%s%d%s%d%s%d\n","The overall Highest score is scored by student ", 1234, " in subject ", 1234 ," scoring ", 1234 );
+        System.out.printf("%s%d%s%d%s%d\n","The overall Lowest score is scored by student ", 1234, " in subject ", 1234 ," scoring ", 1234 );
+
+        System.out.println(equals.repeat(110));
+
+        System.out.println("\n");
+        System.out.println("CLASS SUMMARY");
+        System.out.println(equals.repeat(110));
+
+        System.out.printf("%s%d%s%d\n","The Best Graduating Student is : Student ", 1234 , " scoring " , 1234 );
+
+        System.out.println(equals.repeat(110));
+
+        System.out.println(" ");
+        System.out.println(exclamation.repeat(110));
+
+        System.out.printf("%s%d%s%d\n","Worst Graduating Student is : Student ", 1234, " scoring " , 1234);
+
+        System.out.println(exclamation.repeat(110));
+        System.out.println(" ");
+
+        System.out.println(equals.repeat(110));
+
+        System.out.printf("%s%d\n","Class Total Score is   : ", 1234 );
+        System.out.printf("%s%d\n","Class Average Score is : ", 1234 );
+
+        System.out.println(equals.repeat(110));
 
 
-//                  int [] highScores = new int[highestScoreSorted.length];
-//                  int [] lowScores = new int[highestScoreSorted.length];
 
-
-//              }
-//
-//
-//          }
 
 
     }
-
-
-
-//
-//
-//        System.out.println(equals.repeat(100));
-//        System.out.println(equals.repeat(110));
-//
-//        System.out.printf("%s%d%s%d%s\n","The Hardest Subject is Subject ", hardSubject , " with ", numberOfStudentThatFailed ," failures ");
-//        System.out.printf("%s%d%s%d%s\n","The Easiest Subject is Subject ", easySubject , " with ", numberOfStudentThatPassed ," passes ");
-//        System.out.printf("%s%d%s%d%s%d\n","The overall Highest score is scored by student ", 1234, " in subject ", 1234 ," scoring ", 1234 );
-//        System.out.printf("%s%d%s%d%s%d\n","The overall Lowest score is scored by student ", 1234, " in subject ", 1234 ," scoring ", 1234 );
-//
-//        System.out.println(equals.repeat(110));
-//
-//        System.out.println("\n");
-//        System.out.println("CLASS SUMMARY");
-//        System.out.println(equals.repeat(110));
-//
-//        System.out.printf("%s%d%s%d\n","The Best Graduating Student is : Student ", 1234 , " scoring " , 1234 );
-//
-//        System.out.println(equals.repeat(110));
-//
-//        System.out.println(" ");
-//        System.out.println(exclamation.repeat(110));
-//
-//        System.out.printf("%s%d%s%d\n","Worst Graduating Student is : Student ", 1234, " scoring " , 1234);
-//
-//        System.out.println(exclamation.repeat(110));
-//        System.out.println(" ");
-//
-//        System.out.println(equals.repeat(110));
-//
-//        System.out.printf("%s%d\n","Class Total Score is   : ", 1234 );
-//        System.out.printf("%s%d\n","Class Average Score is : ", 1234 );
-//
-//        System.out.println(equals.repeat(110));
-
-
 
 
 
@@ -318,4 +317,3 @@ public class Main {
 
     //THIS IS THE END
 }
-
