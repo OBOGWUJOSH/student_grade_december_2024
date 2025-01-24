@@ -105,8 +105,6 @@ public class Main {
         int totalScoreOfSubject = 0;
         double averageScoreOfSubject = 0;
 
-        int passes = 0;
-        int fails = 0;
 
         for (ii = 0; ii < studentCounter; ii++) {
 
@@ -154,14 +152,16 @@ public class Main {
 //      PRINTING SUBJECT SUMMARY
 
 
-        passes = 0;
-        fails = 0;
+        int easySubjectIndex = 0;
+        int hardSubjectIndex = 0;
 
         int numberOfStudentThatPassed = 0;
         int numberOfStudentThatFailed = 0;
 
-        int easySubjectIndex = 0;
-        int hardSubjectIndex = 0;
+
+        int passes = 0;
+        int fails = 0;
+
 
         for (int i = 0; i < studentList.length; i++) {
 
@@ -208,11 +208,11 @@ public class Main {
             for (int score : highestScore) {
                 if (score > passMark) {
                     numberOfStudentThatPassed += 1;
-                }
-                if (score < passMark) {
+                }else if (score < passMark) {
                     numberOfStudentThatFailed += 1;
                 }
             }
+
 
 //          SUBJECT SUMMARY
             System.out.println("Highest scoring student is student " + (highestScoringStudentsPosition + 1) + " scoring: " + (highestScoreSorted[0]));
@@ -223,27 +223,46 @@ public class Main {
             System.out.println("Number of Failed Students: " + numberOfStudentThatFailed);
             System.out.println(" ");
 
+            easySubjectIndex = 0;
+            hardSubjectIndex = 0;
 
-            if (numberOfStudentThatPassed > numberOfStudentThatFailed) {
+
+            if (numberOfStudentThatPassed >= numberOfStudentThatFailed) {
                 passes += 1;
-            } else if (numberOfStudentThatFailed > numberOfStudentThatPassed) {
+            } else {
                 fails += 1;
             }
-            if (fails > passes) {
-                hardSubjectIndex = i;
-            } else if (passes > fails) {
-                easySubjectIndex = i;
-            }
+
+            System.out.println("passes");
+            System.out.println(passes);
+            System.out.println("fails");
+            System.out.println(fails);
             System.out.println(" ");
 
 
+            if (passes > fails) {
+                easySubjectIndex = i + 1;
+            } else{
+                hardSubjectIndex = i + 1;
+            }
+
         }
-        if (fails == 0) {
-            System.out.println("no hard subjects");
-        } else {
-            System.out.printf("%s%d%s%d%s\n", "The Hardest Subject is Subject ", hardSubjectIndex + 1, " where ", numberOfStudentThatFailed, " student failed ");
-        }
-        System.out.printf("%s%d%s%d%s\n", "The Easiest Subject is Subject ", easySubjectIndex + 1, " where ", numberOfStudentThatPassed, " student passed ");
+
+
+        System.out.println("easySubjectIndex");
+        System.out.println(easySubjectIndex);
+        System.out.println("hardSubjectIndex");
+        System.out.println(hardSubjectIndex);
+        System.out.println(" ");
+
+        System.out.println(" ");
+
+//        if (fails == 0) {
+//            System.out.println("no hard subjects");
+//        } else {
+        System.out.printf("%s%d%s%d%s\n", "The Hardest Subject is Subject ", hardSubjectIndex, " where ", numberOfStudentThatFailed, " student failed ");
+//        }
+        System.out.printf("%s%d%s%d%s\n", "The Easiest Subject is Subject ", easySubjectIndex, " where ", numberOfStudentThatPassed, " student passed ");
 
         System.out.printf("%s%d%s%d%s%d\n", "The overall Highest score is scored by student ", 1234, " in subject ", 1234, " scoring ", 1234);
         System.out.printf("%s%d%s%d%s%d\n", "The overall Lowest score is scored by student ", 1234, " in subject ", 1234, " scoring ", 1234);
