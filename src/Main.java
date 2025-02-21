@@ -22,11 +22,11 @@ public class Main {
  */
 
         System.out.println("How Many Students Do You Have: ");
-        int numberOfStudent = scannerOne.nextInt();
+        int numberOfStudents = scannerOne.nextInt();
 
 
         System.out.println("How many Subject Do You Offer: ");
-        int numberOfSubject = scannerOne.nextInt();
+        int numberOfSubjects = scannerOne.nextInt();
 
 
         String greaterThan = ">";
@@ -41,24 +41,28 @@ public class Main {
         int subjectCounter = 0;
         int studentCounter;
 
+//        int numberOfAllImputedScores = numberOfStudents * numberOfSubjects;
+        int[][] studentList = new int[numberOfStudents][numberOfSubjects];
 
-        int[][] studentList = new int[numberOfStudent][numberOfSubject];
+        int score;
 
 
         //INPUT COLLECTION POINT
-        for (studentCounter = 0; studentCounter < numberOfStudent; studentCounter++) {
+
+        for (studentCounter = 0; studentCounter < numberOfStudents; studentCounter++) {
 
             System.out.println("Enter A Score from 0 to 100");
-            for (subjectCounter = 0; subjectCounter < numberOfSubject; subjectCounter++) {
-                int score;
+            for (subjectCounter = 0; subjectCounter < numberOfSubjects; subjectCounter++) {
 
                 do {
                     System.out.println("Enter the scores of student " + (studentCounter + 1));
                     System.out.print("subject " + (subjectCounter + 1) + ": ");
                     score = scannerOne.nextInt();
+
                     if (score < 0 || score > 100) {
                         System.out.println("Score must be between 0 and 100.");
                     }
+
 
                 } while (score < 0 || score > 100);
 
@@ -71,39 +75,41 @@ public class Main {
         }
 
 
+
 //      PRINTING THE TABLE
         StringBuilder subject = new StringBuilder();
 
-        System.out.println(equals.repeat(110));
 
-        for (int i = 0; i < numberOfSubject; i++) {
+        System.out.println(equals.repeat(80));
+
+        for (int i = 0; i < numberOfSubjects; i++) {
             subject.append("SUB ").append(i + 1).append("     ");//Make the SUB  increase
         }
 
         System.out.printf("%3s", "STUDENTS     " + subject + "TOT     " + "AVE     " + "POS     ");
         System.out.println();
 
-        System.out.println(equals.repeat(100));
+        System.out.println(equals.repeat(70));
+
 
 
 //      PRINTING OUT THE TABLE BODY
-        int[] totalArray = new int[numberOfStudent];
-        int[] totalArraySorted = new int[numberOfStudent];
+        int[] totalArray = new int[numberOfStudents];
 
         double[] averageArray = new double[totalArray.length];
         double[] positionArray = new double[averageArray.length];
 
-        int[] highestScore = new int[studentList.length];
-        int[] highestScoreSorted = new int[studentList.length];
+        int[] allScoresPerSubject = new int[numberOfStudents];
+        int[] allScoresPerSubjectSorted = new int[numberOfStudents];
 
-        int lowestPositionIndex = numberOfSubject - 1;
-        int passMark = 80;
+        int lowestStudentsPositionIndex = numberOfStudents - 1;
 
         int ii;
         int jj;
 
-        int totalScoreOfSubject = 0;
-        double averageScoreOfSubject = 0;
+        int totalScoreOfSubject;
+        double averageScoreOfSubject;
+
 
 
         for (ii = 0; ii < studentCounter; ii++) {
@@ -113,9 +119,11 @@ public class Main {
             for (jj = 0; jj < subjectCounter; jj++) {
                 System.out.printf("%3d%s", studentList[ii][jj], "       ");
                 totalArray[ii] += studentList[ii][jj];
-                averageArray[ii] = (double) totalArray[ii] / numberOfSubject;
+                averageArray[ii] = (double) totalArray[ii] / numberOfSubjects;
                 positionArray[ii] = averageArray[ii];
             }
+
+
 
             //Total column print out
             System.out.printf("%3d%s", totalArray[ii], "    ");
@@ -126,45 +134,55 @@ public class Main {
 //          PRINT OUT POSITION COLUMN
             sortArray(positionArray);
 
-//          printing out array indexes[temporary]
-            System.out.print("[");
-            for (int x = 0; x < positionArray.length; x++) {
-                for (double numbers : averageArray) {
-                    if (numbers == positionArray[x]) {
-                        System.out.printf("%.2f%s ", positionArray[x], " ");
-                    }
-                }
-            }
-            System.out.print("]");
+//          printing out array indexes temporarily
+//            System.out.print("[");
+
+//            for (int x = 0; x < positionArray.length; x++) {
+//                for (double numbers : averageArray) {
+//                    if (numbers == positionArray[x]) {
+//                        System.out.printf("%.2f%s", numbers, "");
+//                    }
+//                }
+//            }
+//            System.out.print("]");
 
 
 //             printing out the position here
             int position;
             position = positionMethod(positionArray, averageArray);
             System.out.println(position);
-
         }
+
         System.out.println(" ");
-        System.out.println(equals.repeat(100));
-        System.out.println(equals.repeat(110));
+        System.out.println(equals.repeat(70));
+        System.out.println(equals.repeat(70));
 
 
 //      PRINTING SUBJECT SUMMARY
 
+        int hardestSubjectIndex = 0;
+        int easiestSubjectIndex = 0;
 
-        int easySubjectIndex = 0;
-        int hardSubjectIndex = 0;
+        int numberOfStudentThatPassed;
+        int numberOfStudentThatFailed;
 
-        int numberOfStudentThatPassed = 0;
-        int numberOfStudentThatFailed = 0;
+        int [] passSubjectArray = new int [numberOfSubjects];
+        int [] failSubjectArray = new int [numberOfSubjects];
+
+        double [] averageScoreOfSubjectArray = new double[numberOfSubjects];
+        double [] averageScoresOfSubjectArraySorted = new double[numberOfSubjects];
+
+        int numberOfPasses = 0;
+        int numberOfFails = 0;
+
+        int highestScoringStudentsPosition = 0;
+        int lowestScoringStudentsPosition = 0;
+
+        int [] highestScores = new int[numberOfSubjects];
+        int [] highestScoresSorted = new int[numberOfSubjects];
 
 
-        int passes = 0;
-        int fails = 0;
-
-
-        for (int i = 0; i < studentList.length; i++) {
-
+        for (int i = 0; i < numberOfSubjects; i++) {
 
             totalScoreOfSubject = 0;
             averageScoreOfSubject = 0;
@@ -172,114 +190,122 @@ public class Main {
             numberOfStudentThatPassed = 0;
             numberOfStudentThatFailed = 0;
 
+            System.out.println(" ");
+            System.out.println(" ");
             System.out.println("Subject " + (i + 1));//PRINT OUT SUBJECT 1
 
-            for (int q = 0; q < studentList.length; q++) {
-                highestScore[q] = studentList[q][i];
-                highestScoreSorted[q] = highestScore[q];
+
+//            creating the highestScoreSorted array
+            for (int q = 0; q < numberOfStudents; q++) {
+                allScoresPerSubject[q] = studentList[q][i];
+                allScoresPerSubjectSorted[q] = allScoresPerSubject[q];
             }
 
-            sortArrayInt(highestScoreSorted);
+            sortArrayInt(allScoresPerSubjectSorted);
 
-//            System.out.println(" ");
-//            System.out.println(Arrays.toString(highestScore));
-//            System.out.println(Arrays.toString(highestScoreSorted));
-//            System.out.println(" ");
-
-            for (int k : highestScoreSorted) {
+//            Average Of Each Subject Stored in an Array
+            for (int k : allScoresPerSubjectSorted) {
                 totalScoreOfSubject += k;
-                averageScoreOfSubject = (double) totalScoreOfSubject / numberOfSubject;
+                averageScoreOfSubject = (double) totalScoreOfSubject / numberOfSubjects;
+                averageScoreOfSubjectArray[i] = averageScoreOfSubject;
             }
 
-            int highestScoringStudentsPosition = 0;
-            int lowestScoringStudentsPosition = 0;
 
+            int passMark = 80;
 
-            for (int j = 0; j < numberOfSubject; j++) {
-                if (highestScoreSorted[0] == highestScore[j]) {
+            for (int j = 0; j < numberOfStudents; j++) {
+                if (allScoresPerSubjectSorted[0] == allScoresPerSubject[j]) {
                     highestScoringStudentsPosition = j;
-                } else if (highestScoreSorted[numberOfStudent - 1] == highestScore[j]) {
+                } else if (allScoresPerSubjectSorted[numberOfStudents - 1] == allScoresPerSubject[j]) {
                     lowestScoringStudentsPosition = j;
                 }
             }
 
 
-            //Counting the number of students who passed and failed
-            for (int score : highestScore) {
-                if (score > passMark) {
-                    numberOfStudentThatPassed += 1;
-                }else if (score < passMark) {
-                    numberOfStudentThatFailed += 1;
+//            System.out.println(Arrays.toString(averageScoreOfSubjectArray));
+
+            for (int j = 0; j < numberOfSubjects; j++) {
+                averageScoresOfSubjectArraySorted[j] = averageScoreOfSubjectArray[j];
+            }
+            sortArray(averageScoresOfSubjectArraySorted);
+
+
+//            System.out.println(Arrays.toString(averageScoresOfSubjectArraySorted));
+
+            for (int j = 0; j < numberOfSubjects; j++) {
+                if(averageScoresOfSubjectArraySorted[0] == averageScoreOfSubjectArray[j]){
+                    easiestSubjectIndex = j + 1;
+                }
+                else if (averageScoresOfSubjectArraySorted[numberOfSubjects-1] == averageScoreOfSubjectArray[j]) {
+                    hardestSubjectIndex = j + 1;
                 }
             }
 
+            for (int scores : allScoresPerSubject) {
+                if (scores < passMark) {
+                    numberOfStudentThatFailed +=1;
+                    failSubjectArray[i] = numberOfStudentThatFailed;
+                }
+                if (scores > passMark){
+                    numberOfStudentThatPassed +=1;
+                    passSubjectArray[i] = numberOfStudentThatPassed;
+                }
+            }
+
+            for (int j = 0; j < allScoresPerSubject.length; j++) {
+                highestScores[j] = allScoresPerSubjectSorted[0];
+            }
+            System.out.println(Arrays.toString(highestScores));
+            System.out.println(" ");
 
 //          SUBJECT SUMMARY
-            System.out.println("Highest scoring student is student " + (highestScoringStudentsPosition + 1) + " scoring: " + (highestScoreSorted[0]));
-            System.out.println("The lowest scoring student is student " + (lowestScoringStudentsPosition + 1) + " scoring: " + (highestScoreSorted[lowestPositionIndex]));
+            System.out.println("Highest scoring student is student " + (highestScoringStudentsPosition + 1) + " scoring: " + (allScoresPerSubjectSorted[0]));
+            System.out.println("The lowest scoring student is student " + (lowestScoringStudentsPosition + 1) + " scoring: " + (allScoresPerSubjectSorted[lowestStudentsPositionIndex]));
             System.out.println("Total Score: " + totalScoreOfSubject);
             System.out.printf("%s%.2f\n", "Average Score : ", averageScoreOfSubject);
             System.out.println("Number of Passes: " + numberOfStudentThatPassed);
             System.out.println("Number of Failed Students: " + numberOfStudentThatFailed);
             System.out.println(" ");
 
-            easySubjectIndex = 0;
-            hardSubjectIndex = 0;
+//            System.out.println(Arrays.toString(averageScoreOfSubjectArray));
+//            System.out.println(Arrays.toString(averageScoresOfSubjectArraySorted));
 
+//            System.out.println(" ");
+//            System.out.println(Arrays.toString(failSubjectArray));
+//            System.out.println(Arrays.toString(passSubjectArray));
+//            System.out.println(" ");
+//
+//            System.out.println(hardestSubjectIndex);
+//            System.out.println(easiestSubjectIndex);
+//            System.out.println(" ");
+//
+//            System.out.println(failSubjectArray[hardestSubjectIndex-1]);
+//            System.out.println(passSubjectArray[easiestSubjectIndex-1]);
+            numberOfFails = failSubjectArray[hardestSubjectIndex-1];
+            numberOfPasses = passSubjectArray[easiestSubjectIndex-1];
 
-            if (numberOfStudentThatPassed >= numberOfStudentThatFailed) {
-                passes += 1;
-            } else {
-                fails += 1;
-            }
-
-            System.out.println("passes");
-            System.out.println(passes);
-            System.out.println("fails");
-            System.out.println(fails);
-            System.out.println(" ");
-
-
-            if (passes > fails) {
-                easySubjectIndex = i + 1;
-            } else{
-                hardSubjectIndex = i + 1;
-            }
-
+            System.out.println(Arrays.toString(allScoresPerSubject));
+            System.out.println(Arrays.toString(allScoresPerSubjectSorted));
         }
 
 
-        System.out.println("easySubjectIndex");
-        System.out.println(easySubjectIndex);
-        System.out.println("hardSubjectIndex");
-        System.out.println(hardSubjectIndex);
-        System.out.println(" ");
+
+
+
 
         System.out.println(" ");
-
-//        if (fails == 0) {
-//            System.out.println("no hard subjects");
-//        } else {
-        System.out.printf("%s%d%s%d%s\n", "The Hardest Subject is Subject ", hardSubjectIndex, " where ", numberOfStudentThatFailed, " student failed ");
-//        }
-        System.out.printf("%s%d%s%d%s\n", "The Easiest Subject is Subject ", easySubjectIndex, " where ", numberOfStudentThatPassed, " student passed ");
-
+        System.out.printf("%s%d%s%d%s\n", "The Hardest Subject is Subject ", hardestSubjectIndex, " where ", numberOfFails, " student failed ");
+        System.out.printf("%s%d%s%d%s\n", "The Easiest Subject is Subject ", easiestSubjectIndex, " where ", numberOfPasses, " student passed ");
         System.out.printf("%s%d%s%d%s%d\n", "The overall Highest score is scored by student ", 1234, " in subject ", 1234, " scoring ", 1234);
         System.out.printf("%s%d%s%d%s%d\n", "The overall Lowest score is scored by student ", 1234, " in subject ", 1234, " scoring ", 1234);
+        System.out.println(" ");
+
 
     }
 
 
 
-
-//        int p = 0;
-//
-//        for (p = 0; p < numberOfSubject; p++) {
-//            passes = 0;
-//            fails = 0;
-//        }
-
-//            overall highest and lowest score
+//        overall highest and lowest score
 //        System.out.println(Arrays.toString(totalArray));
 //
 //        for (int i = 0; i < totalArray.length; i++) {
@@ -288,15 +314,10 @@ public class Main {
 //        }
 //        System.out.println(Arrays.toString(totalArraySorted));
 
-
-
-
-
 //            System.out.println(equals.repeat(100));
 //            System.out.println(equals.repeat(110));
 
 //          SUBJECT SUMMARY
-
 //    }
 
 
