@@ -179,8 +179,21 @@ public class Main {
         int lowestScoringStudentsPosition = 0;
 
         int [] highestScores = new int[numberOfSubjects];
+        int [] lowestScores = new int[numberOfSubjects];
         int [] highestScoresSorted = new int[numberOfSubjects];
+        int [] lowestScoresSorted = new int[numberOfSubjects];
 
+        int overallHighestStudentsIndex = 0;
+        int overallLowestStudentsIndex = 0;
+
+        int highestScoreArrayLength = highestScoresSorted.length;
+        int lowestScoreArrayLength = lowestScoresSorted.length;
+
+        int overallHighestScore = 0;
+        int overallLowestScore = 0;
+
+        int studentWithLowestScore = 0;
+        int studentWithHighestScore = 0;
 
         for (int i = 0; i < numberOfSubjects; i++) {
 
@@ -202,6 +215,7 @@ public class Main {
             }
 
             sortArrayInt(allScoresPerSubjectSorted);
+
 
 //            Average Of Each Subject Stored in an Array
             for (int k : allScoresPerSubjectSorted) {
@@ -252,10 +266,6 @@ public class Main {
                 }
             }
 
-            for (int j = 0; j < allScoresPerSubject.length; j++) {
-                highestScores[j] = allScoresPerSubjectSorted[0];
-            }
-            System.out.println(Arrays.toString(highestScores));
             System.out.println(" ");
 
 //          SUBJECT SUMMARY
@@ -281,26 +291,61 @@ public class Main {
 //
 //            System.out.println(failSubjectArray[hardestSubjectIndex-1]);
 //            System.out.println(passSubjectArray[easiestSubjectIndex-1]);
+
             numberOfFails = failSubjectArray[hardestSubjectIndex-1];
             numberOfPasses = passSubjectArray[easiestSubjectIndex-1];
 
+            System.out.println("all scores per subject");
             System.out.println(Arrays.toString(allScoresPerSubject));
             System.out.println(Arrays.toString(allScoresPerSubjectSorted));
+
+            highestScores[i] = allScoresPerSubjectSorted[0];
+            lowestScores[i] = allScoresPerSubjectSorted[numberOfStudents-1];
         }
 
+        for (int j = 0; j < highestScoreArrayLength; j++) {
+            highestScoresSorted[j] = highestScores[j];
+            lowestScoresSorted[j] = lowestScores[j];
+        }
+
+        sortArrayInt(highestScoresSorted);
+        sortArrayInt(lowestScoresSorted);
 
 
+        for (int j = 0; j < highestScoreArrayLength; j++) {
 
+            if (highestScoresSorted[0] == highestScores[j]) {
+                overallHighestStudentsIndex = j + 1;
+                overallHighestScore = highestScoresSorted[0];
+
+            }else if (lowestScoresSorted[highestScoreArrayLength-1] == lowestScores[j]) {
+                overallLowestStudentsIndex = j + 1;
+                overallLowestScore = lowestScoresSorted[highestScoreArrayLength-1];
+            }
+            if(lowestScores[j] == overallLowestScore) {
+                studentWithLowestScore = j;
+            }
+        }
+
+        System.out.println(studentWithLowestScore);
+
+        System.out.println(" ");
+        System.out.println(" ");
+        System.out.println("all highest scores");
+        System.out.println(Arrays.toString(highestScores));
+        System.out.println(Arrays.toString(highestScoresSorted));
+        System.out.println(" ");
+        System.out.println("all lowest scores");
+        System.out.println(Arrays.toString(lowestScores));
+        System.out.println(Arrays.toString(lowestScoresSorted));
 
 
         System.out.println(" ");
         System.out.printf("%s%d%s%d%s\n", "The Hardest Subject is Subject ", hardestSubjectIndex, " where ", numberOfFails, " student failed ");
         System.out.printf("%s%d%s%d%s\n", "The Easiest Subject is Subject ", easiestSubjectIndex, " where ", numberOfPasses, " student passed ");
-        System.out.printf("%s%d%s%d%s%d\n", "The overall Highest score is scored by student ", 1234, " in subject ", 1234, " scoring ", 1234);
-        System.out.printf("%s%d%s%d%s%d\n", "The overall Lowest score is scored by student ", 1234, " in subject ", 1234, " scoring ", 1234);
+        System.out.printf("%s%d%s%d%s%d\n", "The overall Highest score is scored by student ", 1234, " in subject ", overallHighestStudentsIndex, " scoring ", overallHighestScore);
+        System.out.printf("%s%d%s%d%s%d\n", "The overall Lowest score is scored by student ", 1234, " in subject ", overallLowestStudentsIndex, " scoring ", overallLowestScore);
         System.out.println(" ");
-
-
     }
 
 
