@@ -322,6 +322,7 @@ public class Main {
                 overallLowestStudentsIndex = j + 1;
                 overallLowestScore = lowestScoresSorted[highestScoreArrayLength-1];
             }
+
             if(lowestScores[j] == overallLowestScore) {
                 studentWithLowestScore = j;
             }
